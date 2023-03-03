@@ -1,0 +1,87 @@
+{
+  "name": "ASTORIA HIVE - Bee Debris Solid",
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "GCF_000304215",
+                                  "size": 79.71134
+                                }
+                              ],
+                              "name": "Bifidobacterium_asteroides",
+                              "size": 79.71134
+                            }
+                          ],
+                          "name": "Bifidobacterium",
+                          "size": 79.71134
+                        }
+                      ],
+                      "name": "Bifidobacteriaceae",
+                      "size": 79.71134
+                    }
+                  ],
+                  "name": "Bifidobacteriales",
+                  "size": 79.71134
+                }
+              ],
+              "name": "Actinobacteria",
+              "size": 79.71134
+            }
+          ],
+          "name": "Actinobacteria",
+          "size": 79.71134
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Escherichia",
+                              "size": 20.28866
+                            }
+                          ],
+                          "name": "Escherichia",
+                          "size": 20.28866
+                        }
+                      ],
+                      "name": "Enterobacteriaceae",
+                      "size": 20.28866
+                    }
+                  ],
+                  "name": "Enterobacteriales",
+                  "size": 20.28866
+                }
+              ],
+              "name": "Gammaproteobacteria",
+              "size": 20.28866
+            }
+          ],
+          "name": "Proteobacteria",
+          "size": 20.28866
+        }
+      ],
+      "name": "Bacteria",
+      "size": 100.0
+    }
+  ]
+}

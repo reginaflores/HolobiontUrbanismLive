@@ -1,0 +1,167 @@
+{
+  "name": "CROWN HEIGHTS -TOP BAR - Honey",
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "name": "Propionibacteriaceae",
+                          "size": 21.15629
+                        }
+                      ],
+                      "name": "Propionibacteriaceae",
+                      "size": 21.15629
+                    }
+                  ],
+                  "name": "Actinomycetales",
+                  "size": 21.15629
+                }
+              ],
+              "name": "Actinobacteria",
+              "size": 21.15629
+            }
+          ],
+          "name": "Actinobacteria",
+          "size": 21.15629
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Escherichia",
+                              "size": 3.42803
+                            }
+                          ],
+                          "name": "Escherichia",
+                          "size": 3.42803
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Pantoea",
+                              "size": 12.96061
+                            }
+                          ],
+                          "name": "Pantoea",
+                          "size": 12.96061
+                        }
+                      ],
+                      "name": "Enterobacteriaceae",
+                      "size": 16.38864
+                    }
+                  ],
+                  "name": "Enterobacteriales",
+                  "size": 16.38864
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "GCF_000488215",
+                                  "size": 5.08764
+                                }
+                              ],
+                              "name": "Acinetobacter_nectaris",
+                              "size": 5.08764
+                            },
+                            {
+                              "children": [],
+                              "name": "Acinetobacter",
+                              "size": 50.36269
+                            }
+                          ],
+                          "name": "Acinetobacter",
+                          "size": 55.45033000000001
+                        }
+                      ],
+                      "name": "Moraxellaceae",
+                      "size": 55.45033000000001
+                    }
+                  ],
+                  "name": "Pseudomonadales",
+                  "size": 55.45033000000001
+                }
+              ],
+              "name": "Gammaproteobacteria",
+              "size": 71.83896
+            }
+          ],
+          "name": "Proteobacteria",
+          "size": 71.83896
+        }
+      ],
+      "name": "Bacteria",
+      "size": 92.99526
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "GCA_000026365",
+                                  "size": 7.004739999999999
+                                }
+                              ],
+                              "name": "Zygosaccharomyces_rouxii",
+                              "size": 7.004739999999999
+                            }
+                          ],
+                          "name": "Zygosaccharomyces",
+                          "size": 7.004739999999999
+                        }
+                      ],
+                      "name": "Saccharomycetaceae",
+                      "size": 7.004739999999999
+                    }
+                  ],
+                  "name": "Saccharomycetales",
+                  "size": 7.004739999999999
+                }
+              ],
+              "name": "Saccharomycetes",
+              "size": 7.004739999999999
+            }
+          ],
+          "name": "Ascomycota",
+          "size": 7.004739999999999
+        }
+      ],
+      "name": "Eukaryota",
+      "size": 7.004739999999999
+    }
+  ]
+}

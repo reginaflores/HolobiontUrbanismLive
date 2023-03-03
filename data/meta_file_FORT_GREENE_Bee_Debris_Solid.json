@@ -1,0 +1,87 @@
+{
+  "name": "FORT GREENE - Bee Debris Solid",
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "GCF_000304215",
+                                  "size": 72.04802
+                                }
+                              ],
+                              "name": "Bifidobacterium_asteroides",
+                              "size": 72.04802
+                            }
+                          ],
+                          "name": "Bifidobacterium",
+                          "size": 72.04802
+                        }
+                      ],
+                      "name": "Bifidobacteriaceae",
+                      "size": 72.04802
+                    }
+                  ],
+                  "name": "Bifidobacteriales",
+                  "size": 72.04802
+                }
+              ],
+              "name": "Actinobacteria",
+              "size": 72.04802
+            }
+          ],
+          "name": "Actinobacteria",
+          "size": 72.04802
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Bartonella",
+                              "size": 27.95198
+                            }
+                          ],
+                          "name": "Bartonella",
+                          "size": 27.95198
+                        }
+                      ],
+                      "name": "Bartonellaceae",
+                      "size": 27.95198
+                    }
+                  ],
+                  "name": "Rhizobiales",
+                  "size": 27.95198
+                }
+              ],
+              "name": "Alphaproteobacteria",
+              "size": 27.95198
+            }
+          ],
+          "name": "Proteobacteria",
+          "size": 27.95198
+        }
+      ],
+      "name": "Bacteria",
+      "size": 100.0
+    }
+  ]
+}

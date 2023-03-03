@@ -1,0 +1,1059 @@
+{
+  "name": "MEL 1",
+  "children": [
+    {
+      "size": 97.6211,
+      "name": "Bacteria",
+      "children": [
+        {
+          "size": 0.93434,
+          "name": "Acidobacteria",
+          "children": [
+            {
+              "size": 0.93434,
+              "name": "Acidobacteriia",
+              "children": [
+                {
+                  "size": 0.93434,
+                  "name": "Acidobacteriales",
+                  "children": [
+                    {
+                      "size": 0.93434,
+                      "name": "Acidobacteriaceae",
+                      "children": [
+                        {
+                          "size": 0.6221899999999999,
+                          "name": "Granulicella",
+                          "children": [
+                            {
+                              "size": 0.6221899999999999,
+                              "name": "Granulicella",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "size": 0.31215,
+                          "name": "Terriglobus",
+                          "children": [
+                            {
+                              "size": 0.31215,
+                              "name": "Terriglobus",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "size": 37.06309,
+          "name": "Actinobacteria",
+          "children": [
+            {
+              "size": 37.06309,
+              "name": "Actinobacteria",
+              "children": [
+                {
+                  "size": 1.40972,
+                  "name": "Actinomycetales",
+                  "children": [
+                    {
+                      "size": 0.19960999999999998,
+                      "name": "Brevibacteriaceae",
+                      "children": [
+                        {
+                          "size": 0.19960999999999998,
+                          "name": "Brevibacterium",
+                          "children": [
+                            {
+                              "size": 0.19960999999999998,
+                              "name": "Brevibacterium",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.06619,
+                      "name": "Geodermatophilaceae",
+                      "children": [
+                        {
+                          "size": 0.06619,
+                          "name": "Geodermatophilaceae",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.17172,
+                      "name": "Microbacteriaceae",
+                      "children": [
+                        {
+                          "size": 0.17172,
+                          "name": "Curtobacterium",
+                          "children": [
+                            {
+                              "size": 0.17172,
+                              "name": "Curtobacterium",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.90397,
+                      "name": "Micromonosporaceae",
+                      "children": [
+                        {
+                          "size": 0.90397,
+                          "name": "Actinoplanes",
+                          "children": [
+                            {
+                              "size": 0.90397,
+                              "name": "Actinoplanes",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.06823,
+                      "name": "Propionibacteriaceae",
+                      "children": [
+                        {
+                          "size": 0.06823,
+                          "name": "Propionibacterium",
+                          "children": [
+                            {
+                              "size": 0.06823,
+                              "name": "Propionibacterium_acnes",
+                              "children": [
+                                {
+                                  "size": 0.06823,
+                                  "name": "Propionibacterium_acnes",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "size": 35.65337,
+                  "name": "Bifidobacteriales",
+                  "children": [
+                    {
+                      "size": 35.65337,
+                      "name": "Bifidobacteriaceae",
+                      "children": [
+                        {
+                          "size": 35.65337,
+                          "name": "Bifidobacterium",
+                          "children": [
+                            {
+                              "size": 35.65337,
+                              "name": "Bifidobacterium_asteroides",
+                              "children": [
+                                {
+                                  "size": 35.65337,
+                                  "name": "GCF_000304215",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "size": 1.5704,
+          "name": "Bacteroidetes",
+          "children": [
+            {
+              "size": 0.10371,
+              "name": "Cytophagia",
+              "children": [
+                {
+                  "size": 0.10371,
+                  "name": "Cytophagales",
+                  "children": [
+                    {
+                      "size": 0.10371,
+                      "name": "Cytophagaceae",
+                      "children": [
+                        {
+                          "size": 0.10371,
+                          "name": "Hymenobacter",
+                          "children": [
+                            {
+                              "size": 0.10371,
+                              "name": "Hymenobacter",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "size": 0.31801999999999997,
+              "name": "Flavobacteriia",
+              "children": [
+                {
+                  "size": 0.31801999999999997,
+                  "name": "Flavobacteriales",
+                  "children": [
+                    {
+                      "size": 0.31801999999999997,
+                      "name": "Flavobacteriaceae",
+                      "children": [
+                        {
+                          "size": 0.31801999999999997,
+                          "name": "Chryseobacterium",
+                          "children": [
+                            {
+                              "size": 0.02742,
+                              "name": "Chryseobacterium_taeanense",
+                              "children": [
+                                {
+                                  "size": 0.02742,
+                                  "name": "GCF_000304615",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 0.2906,
+                              "name": "Chryseobacterium",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "size": 1.14868,
+              "name": "Sphingobacteriia",
+              "children": [
+                {
+                  "size": 1.14868,
+                  "name": "Sphingobacteriales",
+                  "children": [
+                    {
+                      "size": 1.14868,
+                      "name": "Sphingobacteriaceae",
+                      "children": [
+                        {
+                          "size": 0.66083,
+                          "name": "Pedobacter",
+                          "children": [
+                            {
+                              "size": 0.66083,
+                              "name": "Pedobacter",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "size": 0.48785,
+                          "name": "Sphingobacterium",
+                          "children": [
+                            {
+                              "size": 0.48785,
+                              "name": "Sphingobacterium",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "size": 1.9314099999999998,
+          "name": "Firmicutes",
+          "children": [
+            {
+              "size": 1.7987900000000001,
+              "name": "Bacilli",
+              "children": [
+                {
+                  "size": 0.20794,
+                  "name": "Bacillales",
+                  "children": [
+                    {
+                      "size": 0.20794,
+                      "name": "Bacillaceae",
+                      "children": [
+                        {
+                          "size": 0.20794,
+                          "name": "Bacillus",
+                          "children": [
+                            {
+                              "size": 0.20794,
+                              "name": "Bacillus_licheniformis",
+                              "children": [
+                                {
+                                  "size": 0.20794,
+                                  "name": "Bacillus_licheniformis",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "size": 1.59085,
+                  "name": "Lactobacillales",
+                  "children": [
+                    {
+                      "size": 0.14883,
+                      "name": "Aerococcaceae",
+                      "children": [
+                        {
+                          "size": 0.14883,
+                          "name": "Abiotrophia",
+                          "children": [
+                            {
+                              "size": 0.14883,
+                              "name": "Abiotrophia_defectiva",
+                              "children": [
+                                {
+                                  "size": 0.14883,
+                                  "name": "GCF_000160075",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 1.14757,
+                      "name": "Lactobacillaceae",
+                      "children": [
+                        {
+                          "size": 1.14757,
+                          "name": "Lactobacillus",
+                          "children": [
+                            {
+                              "size": 1.14757,
+                              "name": "Lactobacillus_florum",
+                              "children": [
+                                {
+                                  "size": 1.14757,
+                                  "name": "GCF_000304715",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.29444000000000004,
+                      "name": "Streptococcaceae",
+                      "children": [
+                        {
+                          "size": 0.29444000000000004,
+                          "name": "Streptococcus",
+                          "children": [
+                            {
+                              "size": 0.29444000000000004,
+                              "name": "Streptococcus_sanguinis",
+                              "children": [
+                                {
+                                  "size": 0.29444000000000004,
+                                  "name": "Streptococcus_sanguinis",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "size": 0.13262000000000002,
+              "name": "Negativicutes",
+              "children": [
+                {
+                  "size": 0.13262000000000002,
+                  "name": "Selenomonadales",
+                  "children": [
+                    {
+                      "size": 0.13262000000000002,
+                      "name": "Veillonellaceae",
+                      "children": [
+                        {
+                          "size": 0.13262000000000002,
+                          "name": "Veillonella",
+                          "children": [
+                            {
+                              "size": 0.10958,
+                              "name": "Veillonella_parvula",
+                              "children": [
+                                {
+                                  "size": 0.10958,
+                                  "name": "Veillonella_parvula",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 0.02305,
+                              "name": "Veillonella",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "size": 56.12185,
+          "name": "Proteobacteria",
+          "children": [
+            {
+              "size": 34.19652,
+              "name": "Alphaproteobacteria",
+              "children": [
+                {
+                  "size": 0.54904,
+                  "name": "Caulobacterales",
+                  "children": [
+                    {
+                      "size": 0.54904,
+                      "name": "Caulobacteraceae",
+                      "children": [
+                        {
+                          "size": 0.31679,
+                          "name": "Brevundimonas",
+                          "children": [
+                            {
+                              "size": 0.31679,
+                              "name": "Brevundimonas",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "size": 0.23225,
+                          "name": "Caulobacter",
+                          "children": [
+                            {
+                              "size": 0.23225,
+                              "name": "Caulobacter",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "size": 30.99397,
+                  "name": "Rhizobiales",
+                  "children": [
+                    {
+                      "size": 8.5501,
+                      "name": "Bartonellaceae",
+                      "children": [
+                        {
+                          "size": 8.5501,
+                          "name": "Bartonella",
+                          "children": [
+                            {
+                              "size": 8.5501,
+                              "name": "Bartonella",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.0783,
+                      "name": "Beijerinckiaceae",
+                      "children": [
+                        {
+                          "size": 0.0783,
+                          "name": "Beijerinckiaceae",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "size": 14.98523,
+                      "name": "Bradyrhizobiaceae",
+                      "children": [
+                        {
+                          "size": 13.285820000000001,
+                          "name": "Bradyrhizobium",
+                          "children": [
+                            {
+                              "size": 13.285820000000001,
+                              "name": "Bradyrhizobium_sp_DFCI_1",
+                              "children": [
+                                {
+                                  "size": 13.285820000000001,
+                                  "name": "GCF_000465325",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "size": 1.6994099999999999,
+                          "name": "Rhodopseudomonas",
+                          "children": [
+                            {
+                              "size": 1.6994099999999999,
+                              "name": "Rhodopseudomonas_palustris",
+                              "children": [
+                                {
+                                  "size": 1.6994099999999999,
+                                  "name": "Rhodopseudomonas_palustris",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 7.3803399999999995,
+                      "name": "Rhizobiaceae",
+                      "children": [
+                        {
+                          "size": 7.3803399999999995,
+                          "name": "Agrobacterium",
+                          "children": [
+                            {
+                              "size": 5.89936,
+                              "name": "Agrobacterium_tumefaciens",
+                              "children": [
+                                {
+                                  "size": 5.89936,
+                                  "name": "Agrobacterium_tumefaciens",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 1.48099,
+                              "name": "Agrobacterium",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "size": 0.8701399999999999,
+                  "name": "Rickettsiales",
+                  "children": [
+                    {
+                      "size": 0.8701399999999999,
+                      "name": "Rickettsiaceae",
+                      "children": [
+                        {
+                          "size": 0.8701399999999999,
+                          "name": "Rickettsia",
+                          "children": [
+                            {
+                              "size": 0.12349,
+                              "name": "Rickettsia_felis",
+                              "children": [
+                                {
+                                  "size": 0.12349,
+                                  "name": "GCF_000012145",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 0.044180000000000004,
+                              "name": "Rickettsia_prowazekii",
+                              "children": [
+                                {
+                                  "size": 0.044180000000000004,
+                                  "name": "Rickettsia_prowazekii",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 0.70248,
+                              "name": "Rickettsia",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "size": 1.7833700000000001,
+                  "name": "Sphingomonadales",
+                  "children": [
+                    {
+                      "size": 1.7833700000000001,
+                      "name": "Sphingomonadaceae",
+                      "children": [
+                        {
+                          "size": 1.7260099999999998,
+                          "name": "Sphingobium",
+                          "children": [
+                            {
+                              "size": 1.7260099999999998,
+                              "name": "Sphingobium",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "size": 0.03924,
+                          "name": "Sphingomonas",
+                          "children": [
+                            {
+                              "size": 0.03924,
+                              "name": "Sphingomonas_phyllosphaerae",
+                              "children": [
+                                {
+                                  "size": 0.03924,
+                                  "name": "GCF_000419605",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "size": 0.01813,
+                          "name": "Sphingopyxis",
+                          "children": [
+                            {
+                              "size": 0.01813,
+                              "name": "Sphingopyxis",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "size": 2.57289,
+              "name": "Betaproteobacteria",
+              "children": [
+                {
+                  "size": 2.57289,
+                  "name": "Burkholderiales",
+                  "children": [
+                    {
+                      "size": 0.69762,
+                      "name": "Burkholderiaceae",
+                      "children": [
+                        {
+                          "size": 0.69762,
+                          "name": "Burkholderia",
+                          "children": [
+                            {
+                              "size": 0.69762,
+                              "name": "Burkholderia",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 1.32514,
+                      "name": "Comamonadaceae",
+                      "children": [
+                        {
+                          "size": 1.32514,
+                          "name": "Delftia",
+                          "children": [
+                            {
+                              "size": 0.0575,
+                              "name": "Delftia_acidovorans",
+                              "children": [
+                                {
+                                  "size": 0.0575,
+                                  "name": "Delftia_acidovorans",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 1.2676399999999999,
+                              "name": "Delftia",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.55014,
+                      "name": "Oxalobacteraceae",
+                      "children": [
+                        {
+                          "size": 0.55014,
+                          "name": "Massilia",
+                          "children": [
+                            {
+                              "size": 0.55014,
+                              "name": "Massilia",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "size": 19.352439999999998,
+              "name": "Gammaproteobacteria",
+              "children": [
+                {
+                  "size": 16.99532,
+                  "name": "Enterobacteriales",
+                  "children": [
+                    {
+                      "size": 16.99532,
+                      "name": "Enterobacteriaceae",
+                      "children": [
+                        {
+                          "size": 4.62409,
+                          "name": "Enterobacter",
+                          "children": [
+                            {
+                              "size": 4.1411,
+                              "name": "Enterobacter_aerogenes",
+                              "children": [
+                                {
+                                  "size": 4.1411,
+                                  "name": "Enterobacter_aerogenes",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 0.48299,
+                              "name": "Enterobacter_cloacae",
+                              "children": [
+                                {
+                                  "size": 0.48299,
+                                  "name": "Enterobacter_cloacae",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "size": 0.87992,
+                          "name": "Escherichia",
+                          "children": [
+                            {
+                              "size": 0.11489,
+                              "name": "Escherichia_coli",
+                              "children": [
+                                {
+                                  "size": 0.11489,
+                                  "name": "Escherichia_coli",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 0.76502,
+                              "name": "Escherichia",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "size": 9.55313,
+                          "name": "Pantoea",
+                          "children": [
+                            {
+                              "size": 3.2393400000000003,
+                              "name": "Pantoea_agglomerans",
+                              "children": [
+                                {
+                                  "size": 3.2393400000000003,
+                                  "name": "Pantoea_agglomerans",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 6.31379,
+                              "name": "Pantoea",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "size": 1.93818,
+                          "name": "Serratia",
+                          "children": [
+                            {
+                              "size": 1.93818,
+                              "name": "Serratia_marcescens",
+                              "children": [
+                                {
+                                  "size": 1.93818,
+                                  "name": "Serratia_marcescens",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "size": 2.35712,
+                  "name": "Pseudomonadales",
+                  "children": [
+                    {
+                      "size": 2.09373,
+                      "name": "Moraxellaceae",
+                      "children": [
+                        {
+                          "size": 2.09373,
+                          "name": "Acinetobacter",
+                          "children": [
+                            {
+                              "size": 0.99577,
+                              "name": "Acinetobacter_nectaris",
+                              "children": [
+                                {
+                                  "size": 0.99577,
+                                  "name": "GCF_000488215",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "size": 1.09796,
+                              "name": "Acinetobacter",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "size": 0.26339,
+                      "name": "Pseudomonadaceae",
+                      "children": [
+                        {
+                          "size": 0.26339,
+                          "name": "Pseudomonas",
+                          "children": [
+                            {
+                              "size": 0.26339,
+                              "name": "Pseudomonas",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "size": 1.03054,
+      "name": "Eukaryota",
+      "children": [
+        {
+          "size": 1.01557,
+          "name": "Ascomycota",
+          "children": [
+            {
+              "size": 1.01557,
+              "name": "Eurotiomycetes",
+              "children": [
+                {
+                  "size": 1.01557,
+                  "name": "Eurotiales",
+                  "children": [
+                    {
+                      "size": 1.01557,
+                      "name": "Aspergillaceae",
+                      "children": [
+                        {
+                          "size": 1.01557,
+                          "name": "Aspergillaceae",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "size": 0.014969999999999999,
+          "name": "Microsporidia",
+          "children": [
+            {
+              "size": 0.014969999999999999,
+              "name": "Microsporidia_noname",
+              "children": [
+                {
+                  "size": 0.014969999999999999,
+                  "name": "Microsporidia_noname",
+                  "children": [
+                    {
+                      "size": 0.014969999999999999,
+                      "name": "Nosematidae",
+                      "children": [
+                        {
+                          "size": 0.014969999999999999,
+                          "name": "Nosema",
+                          "children": [
+                            {
+                              "size": 0.014969999999999999,
+                              "name": "Nosema_ceranae",
+                              "children": [
+                                {
+                                  "size": 0.014969999999999999,
+                                  "name": "GCA_000182985",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "size": 1.34836,
+      "name": "Viruses",
+      "children": [
+        {
+          "size": 1.34836,
+          "name": "Viruses_noname",
+          "children": [
+            {
+              "size": 1.34836,
+              "name": "Viruses_noname",
+              "children": [
+                {
+                  "size": 1.34836,
+                  "name": "Viruses_noname",
+                  "children": [
+                    {
+                      "size": 1.34836,
+                      "name": "Caulimoviridae",
+                      "children": [
+                        {
+                          "size": 1.34836,
+                          "name": "Cavemovirus",
+                          "children": [
+                            {
+                              "size": 1.34836,
+                              "name": "Tobacco_vein_clearing_virus",
+                              "children": [
+                                {
+                                  "size": 1.34836,
+                                  "name": "PRJNA14150",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

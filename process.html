@@ -1,0 +1,367 @@
+<!-- ************************************************ -->
+<!-- Created by Regina Flores Mir -->
+<!-- Holobiont Urbanism -->
+<!-- In collaboration with the MIT Media Lab-->
+<!-- ************************************************ -->
+<!--
+______________________________________________________
+______________________________________________________
+DESIGN PROCESS
+______________________________________________________
+______________________________________________________
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/jpg" href="assets/favicon.jpg">
+
+    <meta charset="UTF-8" name = "viewport" content = "width=device-width">
+    <title>HolobiontUrbanism</title>
+    <link rel="icon" href="assets/icon/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link rel="shortcut icon" href="assets/icon/favicon.ico" type="image/x-icon"/>
+    <!--CSS-->
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link href="js/lib/jquery.fullPage.css" rel="stylesheet">
+    <link type='text/css' rel='stylesheet' href="css/style.css">
+    <!-- <link href="js/main.css" rel="stylesheet"> -->
+    <!-- <link href="css/responsive.css" rel="stylesheet"> -->
+
+    <!--JS-->
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.fullPage.min.js"></script>
+    <!-- <script type="text/javascript" src="js/process/app.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            //fullpage
+            $('#fullpage').fullpage({
+                scrollBar:true,
+                keyboardScrolling: true,
+                anchors:['home', 'project', 'designScience', 'group', 'bees', 'hive', 'hiveMap', 'samples', 
+                         'dna', 'taxoMaps', 'data', 'microscopy', 'beedebris', 'question','design','slavin'],
+                navigation: true,
+                navigationPosition: 'right',
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <div id="fullpage">
+
+    <!--HEADER-->
+    <div id="container">
+    <div id="title">
+        <h1>HOLOBIONT URBANISM</h1>
+    </div>
+    <div id="bottomnav">
+        <ul>
+            <li><a href="./"><img src="assets/icon/icon_home.png"><br/>HOME</a></li> 
+            <li><a href="process.html"><img src="assets/icon/icon_process.png"><br/>PROCESS</a></li> 
+            <li><a href="taxonomy.html"><img src="assets/icon/icon_nyc.png"><br/>TAXONOMY</a></li> 
+            <li><a href="data-art.html"><img src="assets/icon/icon_team.png"><br/>DATA ART</a></li> 
+            <li><a href="experience.html"><img src="assets/icon/icon_discover.png"><br/>EXPERIENCE</a></li> 
+        </ul>
+    </div>
+
+    </div>
+ 
+    <!--DEF-->
+        <div class="section main">
+            <h1>
+                Ho.lo.bi.ont
+                <br>
+                <span class="ital">adjective</span> 
+                <br>
+                Animals and plants are no longer heralded as autonomous entities but rather as biomolecular networks composed of the host plus its associated microbes, i.e., "holobionts." 
+                <br>
+                <br>
+                <br>
+                <br>
+                Ur.ban.ism 
+                <br>
+                <span class="ital">noun</span>
+                <br>
+                Refers to both the material aspects of urban living and the cultural aspects of city life.
+            </h1>
+        </div>
+
+    <!--ABSTRACT-->
+        <div class="section abstract">
+            <h1>
+            Holobiont Urbanism is a research endeavor that sets out to study, map, and visualize the microbiome of New York City, inviting participants to reimagine the city they live in as more than a vast metropolis, but rather as a complex and adaptive biological superstructure. Quantitative and artistic methods are used to produce data visualizations that are the basis for a data art installation created by using thermal imaging to capture a live video stream of streets in New York, web-based 3D technologies to artistically render the video, and a design aesthetic crafted from a scientific framework. The project seeks to distort the participant’s perception of the known reality so as to see the city through the lens of the microbial world. Once aware of the companion species that live among us, on us, and in us, participants may begin to review what it means to be human and their relationship to their bodies and to their urban environments.
+            </h1>
+        </div>
+
+
+   <!--JODS-->
+        <div class="section jods">
+            <div class="left">
+                <img id="jods" src="../assets/process/neri-oxman-cycle.jpg">            
+            </div>
+            <div class="right">
+                <p id="jodsdescription1">
+                    “Interdisciplinary work is when people from different disciplines work together. 
+                    But antidisciplinary is something very different; it’s about working in spaces 
+                    that simply do not fit into any existing academic discipline—a specific field 
+                    of study with its own particular words, frameworks, and methods.”  
+                    <br>
+                    <br>–Joi Ito, MIT Media Lab
+                </p>
+            </div>
+            <p id="kreb">Neri Oxman, Journal of Design and Science, jods.mitpress.mit.edu</p> 
+        </div>
+    
+
+       <!--TEAM-->
+        <div class="section team">
+
+            <h2 id="team"> A team of engineers, scientists, designers, artists, and technologists. </h2>
+
+            <table id="teamRow1">
+                <tr id="photos">
+                    <td><img class="photo" src="../assets/team/kevin.jpg"></td>
+                </tr>
+
+                <tr id="name">
+                    <td><a href="https://www.media.mit.edu/people/slavin">KEVIN SLAVIN</a> <br><br>Princpial Investigator <br> Playful Systems <br> MIT Media Lab</td>
+                </tr>
+            </table>
+            <table id="teamRow2">
+                <tr id="photos">
+                    <!-- <td><img class="photo" src="../assets/team/kevin.jpg"></td> -->
+                    <td><img class="photo" src="../assets/team/miguel.jpg"></td>
+                    <td><img class="photo" src="../assets/team/regina2.jpg"></td>
+                    <td><img class="photo" src="../assets/team/chrisw.jpg"></td>
+                    <td><img class="photo" src="../assets/team/devora.jpg"></td>
+                    <td><img class="photo" src="../assets/team/elizabeth.png"></td>
+                    <td><img class="photo" src="../assets/team/chrisMason2.jpg"></td>
+                </tr>
+
+                <tr id="name">
+                    <!-- <td><a href="https://www.media.mit.edu/people/slavin">KEVIN SLAVIN</a> <br><br>Princpial Investor <br> Playful Systems <br> MIT Media Lab</td> -->
+                    <td><a href="http://miguelperez.cc/">MIGUEL PEREZ</a> <br><br>Project Lead <br> Hive Engineer <br> MIT Media Lab</td>
+                    <td><a href="http://www.reginafloresmir.com/">REGINA FLORES MIR</a> <br><br>Design<br>World/Data Analysis<br>Parsons DT</td>
+                    <td><a href="http://www.chriswoebken.com/">CHRIS WOEBKEN</a> <br><br>Design <br> Species Design <br> Extrapolation Factory</td>  
+                    <td><a href="http://cooper.edu/about/trustees/devora-najjar">DEVORA NAJJAR</a> <br><br>Science<br>DNA Sequencing<br>Cooper Union</td>
+                    <td><a href="http://www.elizabeth-henaff.net/">ELIZABETH HENAFF</a> <br><br>Science<br>DNA Sequencing<br>Weill Cornell</td>
+                    <td><a href="http://www.masonlab.net/">CHRIS MASON</a><br><br>Science<br>Chief Science Advisor<br>Weill Cornell</td>
+                </tr>
+            </table>
+        </div>
+
+    <!--BEES-->
+        <div class="section bee">
+            <!-- <div class="left"> -->
+                <img id="bee" src="../assets/process/beeHex.svg">            
+            <!-- </div> -->
+                <p id="beeDescription">    
+                    <br> Bees as citizen scientists. 
+                </p>
+
+        </div>
+
+    <!--HIVE-->
+        <div class="section Hive">
+            <video id="hiveVideo" src="assets/video/hive-animation.mp4" autoplay ></video> 
+            <!-- <iframe id="hiveVideo" src="https://player.vimeo.com/video/163044744?portrait=0&loop=1" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+            <div class="right">
+                <p id="HiveDescription">
+                    Custom bee hives are deployed on New York City roof-tops.
+                </p>
+                <p id="HiveDescriptiontext1">    
+                    <br> 
+                    <br> 
+                    <br> Trays at the bottom of the hives allow scientists to 
+                    extract bee detritus without disrupting the hive. 
+                    The bees are never disturbed or hurt - they are true collaborators.
+                </p>
+            </div>
+            <p id="miguel1">Animation by Miguel Perez</p> 
+
+        </div> 
+
+   <!--MAP-->
+        <div class="section mapImage">
+            <div class="left">
+                <img id="mapImage" src="../assets/process/map.png">            
+            </div>
+                <p id="MapDescription">    
+                    <br> Partnering with apiarists in Brooklyn and Queens.
+                </p>
+                <p id="MapDescriptiontext1">    
+                    <br> 
+                    <br> 
+                    <br> Bees travel about 1.5 miles from their hives,
+                    but always return, so we can see what environmental interactions
+                    they have in these neighborhoods.  
+                </p>
+        </div>
+
+   <!--SAMPLES-->
+        <div class="section sample">
+             <tr id="photos">
+                <td><img id="sample1" src="./assets/process/testtube.png"></td>
+            </tr>
+
+            <div class="right">
+                <p id="descriptionSample">
+                    Scientists collect metagenomic samples.
+                </p>
+                <p id="descriptionSample1">    
+                    <!-- <br>  -->
+                    <br> 
+                    <br>Metagenomics is the study of genetic material recovered directly 
+                    from environmental samples. These samples are taken from the hive, bees, honey, and bee wax.  
+                    The scientists then purify the samples in their lab to extract DNA.  
+                </p>
+            </div>
+        </div>
+    
+
+   <!--SEQ-->
+        <div class="section seq">
+            <div class="left">
+                <img id="seq" src="../assets/process/sequence.png">            
+            </div>
+            <div class="right">
+                <p id="SeqDescription">
+                    DNA from the bee samples are  
+                    <br>sequenced using shotgun next-generation sequencing technology. 
+                </p>
+            </div>
+            <p id="SeqDescription1">    
+                    <!-- <br>  -->
+                    <br> 
+                    <br>Scientists remove all the bee DNA from the data and analyze only
+                    the remaining DNA to see what microbial life exsits in the environment
+                    in the neighborhoods.  
+            </p>
+            <p id="miguel2">Illustration by Miguel Perez</p> 
+ 
+        </div>
+
+    <!--TAXOMAPS-->
+    <div class="section taxoMaps">
+        <div class="taxoMaps">
+            <img id="one" src="../assets/process/astoria.png">  
+            <img id="two" src="../assets/process/fg.png">   
+            <img id="three" src="../assets/process/chtb.png">  
+            <img id="four" src="../assets/process/chL.png">          
+        </div>
+
+        <p id="taxoMapsDescription">
+            Taxonomical mapping by neighborhood. 
+        </p>
+        <p id="taxoMapsDescription1">    
+                 <br>
+                <br> 
+                <br>The maps show the microbial "fingerprint" of each neighboorhood and can visually hightlight their unique quality.
+            </p>
+
+    </div>
+
+   <!--FLARE-->
+
+        <div class="section flare">
+            <div class="left">
+                <img id="flare" src="../assets/process/flaremap2.png">            
+            </div>
+            <div class="right">
+                <p id="flareDescription">
+                    Data visualization reveal 
+                    <br>microbial links between neighboorhoods.
+                </p>
+            </div>
+            <p id="flareDescription1">    
+                    <!-- <br>  -->
+                    <br> 
+                    <br>And can begin to highlight the differences to show which species are unique to a neighboorhood.  
+                </p>
+        </div>
+
+    <!--MICROSCOPE-->
+        <div class="section microscope">
+            <!-- <div class="left"> -->
+                <img id="microscope" src="../assets/process/microscope.png">            
+            <!-- </div> -->
+                <p id="microscopeDescription">    
+                    <br> We can peer into the microbial world using a Nanotronics microscope. 
+                </p>
+
+        </div>
+
+    <!--VIDEO-->
+      
+        <div class="section Hive">              
+            <!-- <video src="assets/video/Asphalt.mov" autoplay ></video>  -->
+            <iframe src="https://player.vimeo.com/video/159450774?portrait=0&loop=1" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div> 
+
+    <!--DESIGN QUESTION-->
+        <div class="section question">                   
+            <p id="questionDescription">    
+                <br> How can we bring the microbial world to life to put turn the microscope onto the city?
+            </p>
+
+        </div>
+    <!--DESIGN-->
+        <div class="section design">
+                <p id="designDescription">    
+                    A design aesthetic crafted from a scientific framework.                    
+                    <br>
+                    <br> 
+             <table id="designVideo">
+                <tr id="photos">
+                    <td><video class="streetVid" src="assets/video/streetsmall.mov" autoplay muted loop ></video></td>
+                    <td><video class="streetVid" id="flowfieldMov" src="assets/video/flowfield.mov" autoplay loop ></video></td>
+                    <td><video class="streetVid" id="flowfieldMov" src="assets/video/3dmeshsmall.mov" autoplay loop ></video></td>
+
+                </tr>
+
+                <tr id="designVidDes">
+                    <td>Microbes perceive their the world through <br>
+                    temperature. Using a thermal camera, 
+                    <br> videos are taken of streets in New York. <br>
+                    Each species of microbe thrives in its own  <br>
+                    optimal temperature range. 
+                    </td>
+                    <td><br>Taking inspiration from computational fluid <br>
+                    dynamics in biological systems, flow fields <br>
+                    are used to model the movement of urban <br>
+                    microbial species. Microbes are then mapped <br>
+                    to the scene based on temperature. 
+                    <br>
+                    More flow fields <a href="flow-field.html"><span id="flowLink">here</span>.</a>
+                    </td>
+                    <td>                
+                    <br>The video is rendered on a 3D mesh to<br> 
+                    bring depth into the scene. The absence <br>
+                    of color reflects that microbes do not <br>
+                    “see” color as humans do. Applying a  <br>
+                    microbial depth of field, only objects <br>
+                    that are near can be perceived.<br>   
+                    </td>        
+                </tr>
+            </table>
+        </div>
+
+    
+    <!--QUOTE-->
+
+        <div class="section quote">
+            <h1>
+                “There is a vast negative space around us, and we think it’s empty, the same way we imagined life before germ theory. It’s not empty. It’s more alive than anything we build. This is a project in shifting what Foucault called 'the liminal horizon' so that you understand the whole world differently when you look away from what we’ve shown you.” 
+                <br>
+                <br>–Kevin Slavin
+            </h2>
+        </div>
+
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,759 @@
+    @import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+
+    @font-face {
+            font-family: 'LetterGothic';
+            src: url(../assets/fonts/LetterGothicStd.otf);
+    }
+
+    body {
+        margin: 0px;
+        border: 0px;
+        padding: 0px;
+        background-color: black;
+        font-family: 'Inconsolata';
+    }
+
+    /*--------------NAV BAR MAIN----------------------*/
+
+    #title {
+        margin: auto;
+        position: absolute;
+        margin-top: 1%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 40%;
+        z-index: 150;
+        color: #ffffff;
+        font-size: 1.5vw;
+        letter-spacing: 0.8em;
+        text-transform: uppercase;
+        text-align: center;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+
+    #title h1{
+        font-family: 'LetterGothic';
+        /*font-family: 'Inconsolata';*/
+        font-size: 2.2em;
+    }
+
+    #container {
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 20vh;
+    }
+
+    #bottomnav{
+        width: 100vw;
+        height: 100%;
+        padding: 110px 0 0 0;
+        /*height: 160px;*/
+        /*padding: 30px 0 0 0;*/
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0 auto;
+        z-index: 100;
+        /* top: 0; */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        /*background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));*/
+    }
+
+    #bottomnavMobile{
+        visibility: hidden;
+    }
+
+    #bottomnav ul{
+        list-style:none;
+        padding: 0;
+        /* display:inline-block; */
+        /* width: inherit; */
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    #bottomnav ul li{
+        color:white;
+        width: 10%;
+        /* float:left; */
+        display: inline-block;
+        /*was 20px*/
+        padding: 0 10px; 
+        position: relative;
+        text-align:center;
+        line-height: 1.5em;
+    }
+
+    #bottomnav ul li img{
+        width: 30%;
+    }
+
+    #bottomnav ul li a{
+        text-decoration: none;
+        color:white;
+        font-size: 0.8em;
+    }
+
+    @media screen and (max-width: 520px) {
+        #bottomnav ul li {
+            width: 54px;
+
+        }
+    }
+    
+    @media screen and (max-width: 425px) {
+        #bottomnav ul li {
+            width: 36px;
+
+        }
+        #bottomnav ul li a{
+        text-decoration: none;
+        color:white;
+        font-size: 0.5em;
+        }
+    }
+
+    /*--------------TANGRAM----------------------*/
+
+    #map {
+        background: rgba(0, 0, 0, 0);
+        z-index:0;
+
+    }
+
+    .canvas {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 150px;
+        opacity: 1.0;
+        border-radius: 5px;
+    }
+
+    .imgcontainer {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 1.0;
+    }
+
+    .caption {
+        font-style: italic;
+        font-size: 16px;
+        line-height: 1.3;
+        text-align: center;
+        opacity: 1.0;
+    }
+
+    .info {
+        font-size: 14px;
+        padding: 7px;
+        text-align: center;
+        opacity: 1.0;
+        cursor: pointer; 
+        cursor: hand;
+    }
+
+    code {
+        font-family: monospace;
+        font-size: 14px;
+        line-height: 1.5em;
+        background-color: #ECECEC;
+    }
+
+    .lang-yaml, .lang-glsl, .lang-bash { 
+        background-color: #ECECEC;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 300px;
+    }
+
+    .leaflet-control-attribution {
+        /*font-family: 'Montserrat', Helvetica, Arial, sans-serif;*/
+        font-weight: 200;
+        color: black;
+        background-color: rgba(0,0,0,0.5);
+        background: rgba(0,0,0,0.5);
+    }
+
+    .leaflet-control-attribution a {
+        /*font-family: 'Montserrat', Helvetica, Arial, sans-serif;*/
+        font-weight: 200;
+        color: black;
+    }
+
+    .leaflet-control-attribution a:hover {
+        font-weight: 400;
+        text-decoration: none;
+    }
+
+    /*--------------PROCESS----------------------*/
+
+    a:link, a:visited, a:hover, a:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    /* -----NAV DOTS------ */
+
+    #fp-nav {
+        width: 50px;
+    }
+
+    #fp-nav ul{
+        float: right !important;
+    }
+
+    #fp-nav ul li a {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #fp-nav ul li a span {
+        background-color: white;
+        width: 9px !important;
+        height: 9px !important;
+    }
+
+    #fp-nav ul li a.active span {
+        background-color: #808080 !important;
+    }
+
+    /* -----HOME------ */
+
+    .main {
+        background-color: #000000;
+    }
+
+    .main h1{
+        color:white;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 17px;
+        padding-top: 10%;
+        margin-left: 30%;
+        margin-right: 30%;
+        text-align: justify;
+    }
+    .ital{
+        font-style: italic;
+    }
+
+    /* -----ABSTRACT------ */
+
+    .abstract {
+        background-color: #000000;
+    }
+
+    .abstract h1{
+        color:white;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 17px;
+        /*padding-top: 10%;*/
+        margin-left: 30%;
+        margin-right: 30%;
+        text-align: justify;
+    }
+
+    /* -----JODS-------*/
+
+    .jods {
+        background-color: black;
+        color: white;
+    }
+
+    #jods {
+        top: 20%;
+        height: 530px;
+        /*margin-right: 5%;*/
+        margin-left: 11%;
+    }
+
+    #jodsdescription1 {
+        position: absolute;
+        top: 40%;
+        margin-left: 56%;
+        margin-right: 13%;
+        /* font-weight: 700; */
+        text-align: justify;
+        font-size: 17px;
+
+    }
+    #kreb{
+        margin-left: 11%;
+        font-size: 10px;
+    }
+    /* -----TEAM------ */
+
+    .team {
+        background-color: black;
+        color: white;
+    }
+
+    #team {
+        position: absolute;
+        top: 100px;
+        /* text-align: center; */
+        left: 26%;
+        margin-top: 3%;
+        font-size: 25px;
+    }
+    @media screen and (min-height: 800px) {
+
+        #team{
+            margin-top: 10%;
+        }        
+
+    }
+
+    #teamRow1 {
+        width: 90%;
+        margin-top: 10%;
+        margin: 0 auto;
+        margin-left: 7%;
+        font-size: 15px;
+        color: white;
+        /*font-weight: 700;*/
+        text-align: left;
+    }
+
+    #teamRow2 {
+        margin-left: 7%;
+        margin-top: 1%;
+
+    }
+
+    #teamRow1 tr {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #teamRow1 tr a{
+        font-weight: 400;
+        margin-top: 10px;
+    }
+
+    #photos {
+        /*text-align: center;*/
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    #name td{
+        padding-left: 0px;
+        padding-top: 20px;
+
+    }
+
+    .photo {
+        width: 200px;
+    }
+
+    /* -----BEE-------*/
+
+    .bee {
+        background-color: black;
+        color: white;
+    }
+
+    #bee {
+        width: 150px;
+        margin-top: -10%;
+        margin-left: 30%;
+        /*margin-right: auto;*/
+    }
+
+    #beeDescription {
+        position: absolute;
+        top: 40%;
+        margin-left: 30%;
+        margin-right: 8%;
+        font-weight: 700;
+        /* text-align: justify; */
+        font-size: 47px;
+    }
+
+    /* -----HIVE-------*/
+    
+    .Hive {
+        background-color: black;
+        color: white;
+    }
+
+    #hiveVideo{
+        top: 20%;
+        height: 300px;
+        margin-left: 7%;    
+        overflow: hidden;
+    }
+
+    #HiveDescription {
+        position: absolute;
+        top: 28%;
+        margin-left: 52%;
+        margin-right: 11%;
+        font-weight: 700;
+        /*text-align: justify;*/
+        font-size: 35px;
+
+    }
+
+    #HiveDescriptiontext1{
+        position: absolute;
+        top: 38%;
+        margin-left: 52%;
+        margin-right: 13%;
+        text-align: justify;
+        font-size: 19px;
+
+    }
+
+    #miguel1{
+        margin-left: 8%;
+        font-size: 10px;
+        margin-top: 1%;
+    }
+
+    /* -----MAPIMAGE-------*/
+
+    .mapImage {
+        background-color: black;
+        color: white;
+        background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+
+    }
+
+    #mapImage {
+        height: 643px;
+        /*margin-top: -6%;*/
+        /*margin-left: 5%;*/
+        margin-right: auto;
+    }
+
+    #MapDescription {
+        position: absolute;
+        top: 1%;
+        margin-left: 4%;
+        right: 62%;
+        margin-right: -10%;
+        font-weight: 700;
+        /* text-align: justify; */
+        font-size: 35px;
+
+    }
+
+    #MapDescriptiontext1{
+        position: absolute;
+        top: 13%;
+        margin-right: 62%;
+        margin-left: 4%;
+        text-align: justify;
+        font-size: 19px;
+    }
+
+    /* -----SAMPLE-------*/
+
+    .sample {
+        background-color: black;
+        color: white;
+    }
+
+    #sample1 {
+        /* top: 22%; */
+        margin-top: -13%;
+        height: 213px;
+        /* width: 100%; */
+        /* margin-top: 30%; */
+        margin-right: 6%;
+        margin-left: 22%;
+        float: left;
+    }
+
+    #descriptionSample{
+        position: absolute;
+        top: 52%;
+        margin-left: 24%;
+        margin-right: 8%;
+        font-weight: 700;
+        text-align: justify;
+        font-size: 35px;
+    }
+
+    #descriptionSample1{
+        position: absolute;
+        top: 56%;
+        margin-right: 29%;
+        margin-left: 24%;
+        text-align: justify;
+        font-size: 19px;
+    }
+
+    /* -----SEQ-------*/
+
+    .seq {
+        background-color: black;
+        color: white;
+    }
+
+    #seq {
+        top: 20%;
+        height: 500px;
+        /*margin-right: 5%;*/
+        margin-left: 5%;
+    }
+
+    #SeqDescription {
+        position: absolute;
+        top: 26%;
+        margin-left: 52%;
+        margin-right: 8%;
+        font-weight: 700;
+        /*text-align: justify;*/
+        font-size: 35px;
+
+    }
+
+    #SeqDescription1 {
+        position: absolute;
+        top: 47%;
+        margin-left: 52%;
+        margin-right: 14%;
+        text-align: justify;
+        font-size: 19px;
+    }
+
+    #miguel2{
+        margin-left: 10%;
+        font-size: 10px;
+        margin-top: -2%;
+    }
+
+    /* -----TAXOMAPS-------*/
+
+    .taxoMaps {
+        background-color: black;
+        color: white;
+    }
+
+    #taxoMapsDescription{
+        position: absolute;
+        top: 25%;
+        margin-left: 18%;
+        /* margin-right: 8%; */
+        font-weight: 700;
+        /* text-align: justify; */
+        font-size: 35px;
+    }
+
+    #taxoMapsDescription1 {
+        position: absolute;
+        top: 26%;
+        margin-left: 18%;
+        margin-right: 38%;
+        text-align: justify;
+        font-size: 19px;
+
+    }
+
+    #one {
+        height: 200px;
+        margin-left: 13%;
+        margin-top: 15%;
+    }
+
+    #two {
+        height: 200px;
+        margin-left: 4%;
+    }
+    #three {
+        height: 200px;
+        margin-left: 3%;
+    }
+    #four {
+        height: 200px;
+        /*margin-right: 5%;*/
+        margin-left: 3%;
+    }
+
+    /*when screen < 500*/
+    @media screen and (max-width: 500px) {
+        #one {
+            height: 100px;
+            margin-left: 13%;
+        }
+
+        #two {
+            height: 100px;
+            margin-left: 1%;
+        }
+        #three {
+            height: 100px;
+            margin-left: 13%;
+        }
+        #four {
+            height: 100px;
+            /*margin-right: 5%;*/
+            margin-left: -1%;
+        }
+    }
+
+    /* -----FLARE-------*/
+
+    .flare {
+        background-color: black;
+        color: white;
+    }
+
+    #flare {
+        top: 20%;
+        height: 600px;
+        /*margin-right: 5%;*/
+        margin-left: 10%;
+    }
+
+    #flareDescription{
+        position: absolute;
+        top: 36%;
+        margin-left: 52%;
+        margin-right: 8%;
+        font-weight: 700;
+        /*text-align: justify;*/
+        font-size: 35px;
+    }
+
+    #flareDescription1{
+        position: absolute;
+        top: 50%;
+        margin-left: 52%;
+        margin-right: 17%;
+        text-align: justify;
+        font-size: 19px;
+    }
+
+    /* -----MICROSCOPE-------*/
+
+    .microscope {
+        background-color: black;
+        color: white;
+    }
+    #microscope {
+        width: 170px;
+        margin-top: -10%;
+        margin-left: 27%;
+        /*margin-right: auto;*/
+    }
+
+    #microscopeDescription {
+        position: absolute;
+        top: 44%;
+        margin-left: 30%;
+        margin-right: 24%;
+        font-weight: 700;
+        text-align: justify;
+        font-size: 35px;
+    }
+
+    /* -----DESIGN QUESTION------ */
+
+   .question {
+        background-color: black;
+        color: white;
+    }
+
+    #questionDescription {
+        position: absolute;
+        top: 35%;
+        margin-left: 30%;
+        margin-right: 24%;
+        font-weight: 700;
+        text-align: justify;
+        font-size: 35px;
+    }
+
+    /* -----DESIGN------ */
+    .design {
+        background-color: black;
+        color: white;
+    }
+
+    #designDescription{
+        position: absolute;
+        top: 18%;
+        margin-left: 7%;
+        margin-right: 8%;
+        font-weight: 700;
+        /*text-align: justify;*/
+        font-size: 35px;    
+    }
+    #designVideo {
+        width: 90%;
+        margin-top: 20%;
+        margin: 0 auto;
+        margin-left: 7%;
+        font-size: 15px;
+        color: white;
+        /*font-weight: 700;*/
+        text-align: left;
+    }
+
+    #designVideo tr {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #designVideo tr a{
+        font-weight: 400;
+        margin-top: 10px;
+    }
+
+    #streetVid {
+        /*text-align: center;*/
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    #designVidDes td{
+        padding-left: 0px;
+        padding-top: 20px;
+        margin-right: 2%
+
+    }
+
+    .streetVid {
+        width: 300px;
+    }
+    #flowfieldMov{
+        height: 203.44px;
+    }
+
+    #flowLink{
+        color: black;
+        background-color: white;
+    }
+
+    /* -----QUOTE------ */
+
+    .quote {
+        background-color: #000000;
+    }
+    .quote h1{
+        color:white;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 17px;
+        margin-left: 30%;
+        margin-right: 30%;
+        text-align: justify;
+    }

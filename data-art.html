@@ -1,0 +1,567 @@
+<!-- ************************************************ -->
+<!-- Created by Regina Flores Mir -->
+<!-- Holobiont Urbanism -->
+<!-- In collaboration with the MIT Media Lab-->
+<!-- ************************************************ -->
+<!--
+______________________________________________________
+______________________________________________________
+MICROBIOME: DATA ART
+______________________________________________________
+______________________________________________________
+-->
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HolobiontUrbanism</title>
+    <link rel="icon" href="assets/icon/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link rel="shortcut icon" href="assets/icon/favicon.ico" type="image/x-icon" />
+
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link type='text/css' rel='stylesheet' href="css/style.css">
+    <style>
+        body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        }
+        /*Note: this moves the GUI below Nav Bar*/
+        .dg.a {
+            margin-right:60px !important;
+            margin-top: 20% !important;
+        }
+
+    </style>
+    <script src="js/lib/jquery.js"></script>
+
+    <script src="js/lib/three.min.js"></script>
+    <script src="js/lib/dat.gui.min.js"></script>
+    <script src="js/lib/TrackballControls.js"></script>
+    <script src="js/lib/threex.windowresize.js"></script>
+
+    <script src="js/shaders/BleachBypassShader.js"></script>
+    <script src="js/shaders/ColorifyShader.js"></script>
+    <script src="js/shaders/ConvolutionShader.js"></script>
+    <script src="js/shaders/CopyShader.js"></script>
+    <script src="js/shaders/FilmShader.js"></script>
+    <script src="js/shaders/HorizontalBlurShader.js"></script>
+    <script src="js/shaders/SepiaShader.js"></script>
+    <script src="js/shaders/VerticalBlurShader.js"></script>
+    <script src="js/shaders/VignetteShader.js"></script>
+
+    <script src="js/postprocessing/EffectComposer.js"></script>
+    <script src="js/postprocessing/RenderPass.js"></script>
+    <script src="js/postprocessing/BloomPass.js"></script>
+    <script src="js/postprocessing/FilmPass.js"></script>
+    <script src="js/postprocessing/TexturePass.js"></script>
+    <script src="js/postprocessing/ShaderPass.js"></script>
+    <script src="js/postprocessing/MaskPass.js"></script>
+
+    <script src="js/dataViz/sphere.js"></script>
+    <script src="js/dataViz/connectors.js"></script>
+    <!-- full screen -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/lib/screenfull.js"></script>
+
+</head>
+<body>
+    <div id="container">
+    <div id="title">
+        <h1>HOLOBIONT URBANISM</h1>
+    </div>
+    <div id="bottomnav">
+        <ul>
+            <li><a href="./"><img src="assets/icon/icon_home.png"><br/>HOME</a></li>
+            <li><a href="process.html"><img src="assets/icon/icon_process.png"><br/>PROCESS</a></li>
+            <li><a href="taxonomy.html"><img src="assets/icon/icon_nyc.png"><br/>TAXONOMY</a></li>
+            <li><a href="data-art.html"><img src="assets/icon/icon_team.png"><br/>DATA ART</a></li>
+            <li><a href="experience.html"><img src="assets/icon/icon_discover.png"><br/>EXPERIENCE</a></li>
+        </ul>
+    </div>
+    </div>
+
+        <div id="hoverText" style="display:none"></div>
+
+        <div id="container2"></div>
+
+        <div id="my-gui-container"></div>
+
+        <script>
+
+
+            var container2;
+
+            var composerScene, composer;
+
+            var cameraOrtho, cameraPerspective, sceneModel, sceneBG, renderer, mesh, directionalLight;
+
+            var controls, winResize, winResize2 ;
+
+            var width = window.innerWidth || 2;
+            var height = window.innerHeight || 2;
+
+            var halfWidth = width / 2;
+            var halfHeight = height / 2;
+
+            var materialColor, material2D, quadBG, quadMask, renderScene;
+
+            var delta = 0.01;
+
+            var raycaster, mouse;
+            var hoveredObject = null;
+            var hoveredObjectColor = null;
+            var neighborObjects = [];
+            var neighborColors = [];
+
+            //Define gui params:
+            var params = {
+                tension: 300,
+                rotateOn: true,
+                rotationSpeed: 0.0001,
+                post: false,
+                hideNav: false,
+                fullScreen: false
+            };
+
+            init();
+            animate();
+
+            function init() {
+
+                container2 = document.getElementById( 'container2' );
+
+                //
+
+                cameraOrtho = new THREE.OrthographicCamera( -halfWidth, halfWidth, halfHeight, -halfHeight, -10000, 10000 );
+                cameraOrtho.position.z = 100;
+
+                cameraPerspective = new THREE.PerspectiveCamera( 50, width / height, 1, 10000 );
+                cameraPerspective.position.z = 900;
+
+                //
+
+                sceneModel = new THREE.Scene();
+                sceneBG = new THREE.Scene();
+
+                //
+
+                directionalLight = new THREE.DirectionalLight( 0xffffff );
+                directionalLight.position.set( 0, -0.1, 1 ).normalize();
+                sceneModel.add( directionalLight );
+
+//////////////////////////////////
+            var gui = new dat.GUI();
+            var f1 = gui.addFolder('Press the h key to hide controls');
+            var navController = f1.add(params, 'hideNav').name("Hide Nav Bar");
+            var fullController = f1.add(params, 'fullScreen').name("Fullscreen");
+            f1.add(params, 'tension', 1, 1000).name("Tension");
+            f1.add(params, 'post').name("Flow On");
+            f1.add(params, 'rotateOn').name("Rotate On");
+            f1.add(params, 'rotationSpeed', 0.0001, 0.005).name("Rotation Speed");
+            f1.open();
+
+            // dat.GUI.toggleHide();
+
+            //Uncomment this if decide to open GUI on load:
+            window.mobilecheck = function() {
+              var check = false;
+              (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+              return check;
+            }
+
+            if(window.mobilecheck()){
+                dat.GUI.toggleHide();
+            }
+
+            navController.onChange(function(value) {
+                if (value) {
+                    $('#container').hide();
+                } else {
+                    $('#container').show();
+                }
+            });
+
+            fullController.onChange(function(value) {
+                if (value) {
+                    screenfull.request();
+                } else {
+                    screenfull.exit();
+                }
+            });
+
+
+
+            //FULLSCREEN
+            $(function () {
+                $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+                if (!screenfull.enabled) {
+                    return false;
+                }
+
+                $(document).on(screenfull.raw.fullscreenchange,
+                    function screenfullChange() {
+                        console.log('Fullscreen change');
+                        if (screenfull.isFullscreen) {
+                            $("#container").hide();
+                            params.hideNav = true;
+                            params.fullScreen = true;
+                        } else {
+                            console.log("MINIMIZING...");
+                            $("#container").show();
+                            params.hideNav = false;
+                            params.fullScreen = false;
+                            console.log("params.fullScreen:" + params.fullScreen);
+                        }
+                        navController.updateDisplay();
+                        fullController.updateDisplay();
+                    });
+            });
+//*****END FULL SCREEN*******//
+
+
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            function onMouseMove( event ) {
+
+                // calculate mouse position in normalized device coordinates
+                // (-1 to +1) for both components
+                mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+            }
+            window.addEventListener( 'mousemove', onMouseMove, false );
+
+            spheres = new Spheres("data/meta_file_species.json", sceneModel, params.tension, params.separation);
+
+/////////////////////////////////
+
+                var materialColor = new THREE.MeshBasicMaterial( {
+                    map: THREE.ImageUtils.loadTexture( "assets/dataViz/plain.png" ),
+                    depthTest: false
+                } );
+
+                quadBG = new THREE.Mesh( new THREE.PlaneBufferGeometry( 1, 1 ), materialColor );
+                quadBG.position.z = -500;
+                quadBG.scale.set( width, height, 1 );
+                sceneBG.add( quadBG );
+
+                //
+
+                var sceneMask = new THREE.Scene();
+
+                quadMask = new THREE.Mesh( new THREE.PlaneBufferGeometry( 1, 1 ), new THREE.MeshBasicMaterial( { color: 0xffaa00 } )  );
+                quadMask.position.z = -300;
+                quadMask.scale.set( width / 2, height / 2, 1 );
+                sceneMask.add( quadMask );
+
+                //
+
+                renderer = new THREE.WebGLRenderer( { antialias: false } );
+                renderer.setClearColor( 0x000000 );
+                renderer.setPixelRatio( window.devicePixelRatio );
+                renderer.setSize( width, height );
+                renderer.autoClear = false;
+
+                //
+
+                renderer.gammaInput = true;
+                renderer.gammaOutput = true;
+
+                //
+
+                container2.appendChild( renderer.domElement );
+
+                //
+                controls = new THREE.TrackballControls(cameraPerspective, renderer.domElement);
+                winResize = new THREEx.WindowResize(renderer, cameraPerspective);
+                winResize2 = new THREEx.WindowResize(renderer, cameraOrtho);
+
+                //
+
+                var shaderBleach = THREE.BleachBypassShader;
+                var shaderSepia = THREE.SepiaShader;
+                var shaderVignette = THREE.VignetteShader;
+                var shaderCopy = THREE.CopyShader;
+
+                var effectBleach = new THREE.ShaderPass( shaderBleach );
+                var effectSepia = new THREE.ShaderPass( shaderSepia );
+                var effectVignette = new THREE.ShaderPass( shaderVignette );
+                var effectCopy = new THREE.ShaderPass( shaderCopy );
+
+                effectBleach.uniforms[ "opacity" ].value = 0.95;
+
+                effectSepia.uniforms[ "amount" ].value = 0.9;
+
+                effectVignette.uniforms[ "offset" ].value = 0.95;
+                effectVignette.uniforms[ "darkness" ].value = 1.6;
+
+                var effectBloom = new THREE.BloomPass( 0.5 );
+                var effectFilm = new THREE.FilmPass( 0.35, 0.025, 648, false );
+                var effectFilmBW = new THREE.FilmPass( 0.35, 0.5, 2048, true );
+
+                var effectHBlur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+                var effectVBlur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+                effectHBlur.uniforms[ 'h' ].value = 2 / ( width / 2 );
+                effectVBlur.uniforms[ 'v' ].value = 2 / ( height / 2 );
+
+                var effectColorify1 = new THREE.ShaderPass( THREE.ColorifyShader );
+                var effectColorify2 = new THREE.ShaderPass( THREE.ColorifyShader );
+                effectColorify1.uniforms[ 'color' ].value.setRGB( 1, 0.8, 0.8 );
+                effectColorify2.uniforms[ 'color' ].value.setRGB( 1, 0.75, 0.5 );
+
+                var clearMask = new THREE.ClearMaskPass();
+                var renderMask = new THREE.MaskPass( sceneModel, cameraPerspective );
+                var renderMaskInverse = new THREE.MaskPass( sceneModel, cameraPerspective );
+
+                renderMaskInverse.inverse = true;
+
+                // effectFilm.renderToScreen = true;
+                //effectFilmBW.renderToScreen = true;
+                //effectDotScreen.renderToScreen = true;
+                //effectBleach.renderToScreen = true;
+                effectVignette.renderToScreen = true;
+                //effectCopy.renderToScreen = true;
+
+                //
+
+                var rtParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBuffer: true };
+
+                var rtWidth  = width / 2;
+                var rtHeight = height / 2;
+
+                //
+
+                var renderBackground = new THREE.RenderPass( sceneBG, cameraOrtho );
+                var renderModel = new THREE.RenderPass( sceneModel, cameraPerspective );
+
+                renderModel.clear = false;
+
+                composerScene = new THREE.EffectComposer( renderer, new THREE.WebGLRenderTarget( rtWidth * 2, rtHeight * 2, rtParameters ) );
+
+                composerScene.addPass( renderBackground );
+                composerScene.addPass( renderModel );
+                composerScene.addPass( renderMaskInverse );
+                composerScene.addPass( effectHBlur );
+                composerScene.addPass( effectVBlur );
+                composerScene.addPass( clearMask );
+
+                //
+
+                renderScene = new THREE.TexturePass( composerScene.renderTarget2 );
+
+                //
+
+                composer = new THREE.EffectComposer( renderer, new THREE.WebGLRenderTarget( rtWidth, rtHeight, rtParameters ) );
+
+                composer.addPass( renderScene );
+                //composer.addPass( renderMask );
+                composer.addPass( effectBloom );
+                composer.addPass( effectFilm );
+                composer.addPass( effectBleach );
+                //composer.addPass( clearMask );
+                composer.addPass( effectVignette );
+
+                //
+
+                //onWindowResize();
+
+                renderScene.uniforms[ "tDiffuse" ].value = composerScene.renderTarget2;
+
+                window.addEventListener( 'resize', onWindowResize, false );
+
+            }
+
+            function onWindowResize( event ) {
+
+                halfWidth = window.innerWidth / 2;
+                halfHeight = window.innerHeight / 2;
+
+                cameraPerspective.aspect = window.innerWidth / window.innerHeight;
+                cameraPerspective.updateProjectionMatrix();
+
+                cameraOrtho.left = -halfWidth;
+                cameraOrtho.right = halfWidth;
+                cameraOrtho.top = halfHeight;
+                cameraOrtho.bottom = -halfHeight;
+
+                cameraOrtho.updateProjectionMatrix();
+
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+                composerScene.setSize( halfWidth * 2, halfHeight * 2 );
+
+                composer.setSize( halfWidth, halfHeight );
+
+                renderScene.uniforms[ "tDiffuse" ].value = composerScene.renderTarget2;
+
+                quadBG.scale.set( window.innerWidth, window.innerHeight, 1 );
+                quadMask.scale.set( window.innerWidth / 2, window.innerHeight / 2, 1 );
+
+            }
+
+            function getText( id ) {
+
+                return document.getElementById( id ).textContent;
+
+            }
+
+            function drawText(obj) {
+                var text = document.getElementById('hoverText');
+                text.style.fontFamily = "Inconsolata";
+                text.style.display = "block";
+                text.style.position = 'absolute';
+                text.style.zIndex = 1000;
+                text.style.width = 100;
+                text.style.height = 100;
+                text.style.color = "white";
+                var thetext = obj.userData.species;
+                if (thetext) {
+                    text.innerHTML = thetext;
+                } else {
+                    text.innerHTML = '';
+                }
+
+                // / window.innerWidth ) * 2 - 1
+                var posX = (mouse.x + 1)/2 * window.innerWidth;
+                var posY = (-mouse.y + 1)/2 * window.innerHeight;
+
+                text.style.top = posY + "px";
+                text.style.left = posX + "px";
+                document.body.appendChild(text);
+            }
+
+            function removeText() {
+                var text = document.getElementById('hoverText');
+                text.style.display = "none";
+            }
+
+            function restoreNeighbors() {
+                for (var i = 0; i < neighborObjects.length; ++i) {
+                    neighborObjects[i].material.color.set( neighborColors[i] );
+                }
+                neighborObjects = [];
+                neighborColors = [];
+            }
+
+            function colorNeighbors() {
+                var connections = hoveredObject.userData.connections;
+                if (hoveredObject.userData.species) {
+                    // it's a species
+                    neighborObjects = connections;
+                    for (var i = 0; i < connections.length; ++i) {
+                        neighborColors.push(connections[i].material.color.getHex());
+                        connections[i].material.color.set( 0xFF0000 );
+                    }
+                    var otherNodes = 0;
+                    for (var i = 0; i < connections.length; ++i) {
+                        // add the species on the other end
+                        var nodes = connections[i].userData.connections;
+                        for (var j = 0; j < nodes.length; ++j) {
+                            if (nodes[j] != hoveredObject) {
+                                otherNodes++;
+                            }
+                        }
+                    }
+                    // console.log("Would've added " + otherNodes + " nodes. Connections: " + connections.length);
+                } else {
+                    // it's a connector
+                    neighborObjects = connections;
+                    for (var i = 0; i < connections.length; ++i) {
+                        neighborColors.push(connections[i].material.color.getHex());
+                        connections[i].material.color.set( 0xFF0000 );
+                    }
+                }
+            }
+
+////////////////////////
+
+
+            function animate() {
+
+                requestAnimationFrame( animate );
+                controls.update();
+
+                ////////////////////////
+                // update the picking ray with the camera and mouse position
+                raycaster.setFromCamera( mouse, cameraPerspective );
+
+                // calculate objects intersecting the picking ray
+                var intersects = raycaster.intersectObjects( sceneModel.children );
+
+                if (intersects.length > 0) {
+
+                    var newObject = intersects[0].object;
+                    if (newObject != hoveredObject) {
+                        // restore the old object, change color of new object
+                        if (hoveredObject) {
+                            hoveredObject.material.color.set(hoveredObjectColor);
+                            restoreNeighbors();
+                        }
+
+                        hoveredObject = newObject;
+                        hoveredObjectColor = hoveredObject.material.color.getHex();
+                        hoveredObject.material.color.set( 0xFF0000 );
+                        colorNeighbors();
+                        drawText(hoveredObject);
+
+                    } // else nothing to do since still hovering on old object
+                } else {
+                    if (hoveredObject) {
+                        // restore the object color since we're not hovering on it anymore
+                        hoveredObject.material.color.set(hoveredObjectColor);
+                        restoreNeighbors();
+                        hoveredObject = null;
+                        hoveredObjectColor = null;
+                        removeText();
+                    }
+                }
+
+                if (spheres.getConnectors()) {
+                    spheres.getConnectors().update(params.tension);
+                } else {
+                    console.log("connectors is nil");
+                }
+                var timer = Date.now() * params.rotationSpeed;//0.0001;
+                if(params.rotateOn){
+                    cameraPerspective.position.x = Math.cos( timer ) * 500;
+                    cameraPerspective.position.z = Math.sin( timer ) * 500;
+                    cameraPerspective.lookAt( sceneModel.position );
+                }
+
+                /////////////////////////
+
+                render();
+
+            }
+
+            function render() {
+
+                var time = Date.now() * 0.0004;
+
+                if ( mesh ) mesh.rotation.y = -time;
+
+                renderer.setViewport( 0, 0, 2 * halfWidth, 2 * halfHeight );
+
+                renderer.clear();
+
+                if(params.post==true){
+                    composerScene.render( delta );
+                    // renderer.setViewport( 0, 0, width, height );
+                    composer.render( delta );
+
+                }else {
+                    renderer.render(sceneBG, cameraOrtho);
+                    renderer.render(sceneModel, cameraPerspective);
+                }
+            }
+
+        </script>
+    </body>
+</html>

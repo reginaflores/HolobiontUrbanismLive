@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" name = "viewport" content = "width=device-width">
+    <title>HolobiontUrbanism</title>
+    <link rel="icon" href="assets/icon/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link rel="shortcut icon" href="assets/icon/favicon.ico" type="image/x-icon"/>
+ 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link type='text/css' rel='stylesheet' href="css/style.css">
+
+	<style>
+		.fa {
+		    display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+			}
+		li{
+			margin-top: 6px;
+		}	
+
+	</style>
+
+	<script src="js/lib/dat.gui.min.js"></script>
+	<script src="js/lib/three.min.js"></script>
+	<script src="js/lib/TrackballControls.js"></script>
+	<script src="js/lib/threex.windowresize.js"></script>
+
+	<script src="js/lib/perlin-noise-simplex.js"></script>
+	<script src="js/particles/particleFlowFun.js"></script>
+	<script src="js/particles/flowFieldFun.js"></script>
+
+
+	<script>
+		function init() {
+			var texture, mesh;
+		
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+
+			document.body.appendChild(renderer.domElement);
+			
+			var scene = new THREE.Scene();
+
+			var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+
+			camera.position.z = 1000;
+
+			scene.add(camera);
+
+			var controls = new THREE.TrackballControls(camera, renderer.domElement);
+			var winResize   = new THREEx.WindowResize(renderer, camera);
+
+			//Define gui params:
+			var params = {
+				xscale: 1000,
+				yscale: 650,
+			
+				// particleNum: 1000,
+			    steerModifier: 0.1,
+			    velocityModifier: 0.2,
+			    modx: 0.01,
+			    mody: 0.01,
+			    modz: 0.01
+			};			
+			var gui = new dat.GUI();
+
+			var f1 = gui.addFolder('Flow Field Controls');
+			f1.add(params, 'xscale', 0.0, 1000);
+			f1.add(params, 'yscale', 0.0, 1000);
+			f1.add(params, 'steerModifier', 0.0, 1);
+			f1.add(params, 'velocityModifier', 0.0, 1);
+			f1.add(params, 'modx', 0.0, 0.2);
+			f1.add(params, 'mody', 0.0, 0.2);
+			f1.add(params, 'modz', 0.0, 0.2);
+			f1.open();
+
+			//Particles and Flow Field
+			var flowField = new FlowField(125, 125, 80, 8, params.modx, params.mody, params.modz);
+			var particles = new Particles(scene, 40000, flowField);
+
+
+			function animate() {
+				requestAnimationFrame(animate);
+
+				flowField.gen(params.modx, params.mody, params.modz);
+				particles.update(params.steerModifier, params.velocityModifier);
+				
+				controls.update();
+
+				renderer.render(scene, camera);
+			}
+
+			animate();
+
+		}
+
+
+
+		window.onload = init;
+	</script>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+ <li><a href="process.html#design"><i class="fa fa-long-arrow-left fa-2x" aria-hidden="true"></i>  Back</a></li>
+
+</body>
+</html>

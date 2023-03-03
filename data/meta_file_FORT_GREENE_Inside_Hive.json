@@ -1,0 +1,313 @@
+{
+  "name": "FORT GREENE - Inside Hive",
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "name": "Propionibacteriaceae",
+                          "size": 1.8986299999999998
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Propionibacterium_acnes",
+                                  "size": 3.3399099999999997
+                                }
+                              ],
+                              "name": "Propionibacterium_acnes",
+                              "size": 3.3399099999999997
+                            }
+                          ],
+                          "name": "Propionibacterium",
+                          "size": 3.3399099999999997
+                        }
+                      ],
+                      "name": "Propionibacteriaceae",
+                      "size": 5.23854
+                    }
+                  ],
+                  "name": "Actinomycetales",
+                  "size": 5.23854
+                }
+              ],
+              "name": "Actinobacteria",
+              "size": 5.23854
+            }
+          ],
+          "name": "Actinobacteria",
+          "size": 5.23854
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Caulobacter",
+                              "size": 1.21393
+                            }
+                          ],
+                          "name": "Caulobacter",
+                          "size": 1.21393
+                        }
+                      ],
+                      "name": "Caulobacteraceae",
+                      "size": 1.21393
+                    }
+                  ],
+                  "name": "Caulobacterales",
+                  "size": 1.21393
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Bartonella",
+                              "size": 4.0125
+                            }
+                          ],
+                          "name": "Bartonella",
+                          "size": 4.0125
+                        }
+                      ],
+                      "name": "Bartonellaceae",
+                      "size": 4.0125
+                    }
+                  ],
+                  "name": "Rhizobiales",
+                  "size": 4.0125
+                }
+              ],
+              "name": "Alphaproteobacteria",
+              "size": 5.226430000000001
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Limnohabitans",
+                              "size": 0.1866
+                            }
+                          ],
+                          "name": "Limnohabitans",
+                          "size": 0.1866
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Polaromonas",
+                              "size": 2.47376
+                            }
+                          ],
+                          "name": "Polaromonas",
+                          "size": 2.47376
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Variovorax",
+                              "size": 3.11145
+                            }
+                          ],
+                          "name": "Variovorax",
+                          "size": 3.11145
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Verminephrobacter",
+                              "size": 2.9480299999999997
+                            }
+                          ],
+                          "name": "Verminephrobacter",
+                          "size": 2.9480299999999997
+                        }
+                      ],
+                      "name": "Comamonadaceae",
+                      "size": 8.71984
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Massilia",
+                              "size": 0.70012
+                            }
+                          ],
+                          "name": "Massilia",
+                          "size": 0.70012
+                        }
+                      ],
+                      "name": "Oxalobacteraceae",
+                      "size": 0.70012
+                    }
+                  ],
+                  "name": "Burkholderiales",
+                  "size": 9.419960000000001
+                }
+              ],
+              "name": "Betaproteobacteria",
+              "size": 9.419960000000001
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Enterobacter_cloacae",
+                                  "size": 17.23649
+                                }
+                              ],
+                              "name": "Enterobacter_cloacae",
+                              "size": 17.23649
+                            }
+                          ],
+                          "name": "Enterobacter",
+                          "size": 17.23649
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Escherichia_coli",
+                                  "size": 2.4069
+                                }
+                              ],
+                              "name": "Escherichia_coli",
+                              "size": 2.4069
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "GCF_000248015",
+                                  "size": 6.021730000000001
+                                }
+                              ],
+                              "name": "Escherichia_hermannii",
+                              "size": 6.021730000000001
+                            },
+                            {
+                              "children": [],
+                              "name": "Escherichia",
+                              "size": 9.39657
+                            }
+                          ],
+                          "name": "Escherichia",
+                          "size": 17.82519
+                        }
+                      ],
+                      "name": "Enterobacteriaceae",
+                      "size": 35.061690000000006
+                    }
+                  ],
+                  "name": "Enterobacteriales",
+                  "size": 35.061690000000006
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Acinetobacter",
+                              "size": 3.8923400000000004
+                            }
+                          ],
+                          "name": "Acinetobacter",
+                          "size": 3.8923400000000004
+                        }
+                      ],
+                      "name": "Moraxellaceae",
+                      "size": 3.8923400000000004
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Pseudomonas_putida",
+                                  "size": 17.43445
+                                }
+                              ],
+                              "name": "Pseudomonas_putida",
+                              "size": 17.43445
+                            },
+                            {
+                              "children": [],
+                              "name": "Pseudomonas",
+                              "size": 23.726589999999998
+                            }
+                          ],
+                          "name": "Pseudomonas",
+                          "size": 41.16104
+                        }
+                      ],
+                      "name": "Pseudomonadaceae",
+                      "size": 41.16104
+                    }
+                  ],
+                  "name": "Pseudomonadales",
+                  "size": 45.05338
+                }
+              ],
+              "name": "Gammaproteobacteria",
+              "size": 80.11506999999999
+            }
+          ],
+          "name": "Proteobacteria",
+          "size": 94.76146
+        }
+      ],
+      "name": "Bacteria",
+      "size": 100.0
+    }
+  ]
+}

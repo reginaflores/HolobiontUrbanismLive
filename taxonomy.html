@@ -1,0 +1,412 @@
+<!-- ************************************************ -->
+<!-- Created by Regina Flores Mir -->
+<!-- Holobiont Urbanism -->
+<!-- In collaboration with the MIT Media Lab-->
+<!-- ************************************************ -->
+<!--
+______________________________________________________
+______________________________________________________
+MICROBIOME: TAXONOMICAL MAPS
+
+Code Basis: http://bl.ocks.org/mbostock/4063550
+
+Note: To save SVG files install this extension
+http://nytimes.github.io/svg-crowbar/
+______________________________________________________
+______________________________________________________
+-->
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HolobiontUrbanism</title>
+    <link rel="icon" href="assets/icon/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link rel="shortcut icon" href="assets/icon/favicon.ico" type="image/x-icon" />
+
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link type='text/css' rel='stylesheet' href="css/style.css">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="css/html5reset.css" media="all"> -->
+    <link rel="stylesheet" href="css/col.css" media="all">
+    <link rel="stylesheet" href="css/4cols.css" media="all">
+    <style>
+
+      body{
+        background-color: black;
+      }
+        /*Note: this moves the GUI below Nav Bar*/
+      .dg.a {
+          margin-right:60px !important;
+          margin-top: 15% !important;
+      }
+      svg{
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+      }
+
+      .node circle {
+        stroke: white;
+        stroke-width: 0.5px;
+      }
+
+      .node {
+        font: 10px sans-serif;
+      }
+
+      .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.5px;
+      }
+
+      #buffer{
+        margin-top: 350px;
+      }
+
+      .row {
+        background-color: black;
+      }
+
+      #labelTop{
+        position: absolute;
+        color: white;
+        font-family: 'Inconsolata';
+        font-size: 17px;
+        /*font-size: 1em;*/
+        margin-left: 5%;
+        top: 30%;
+      }
+      .sideText {
+        color: white;
+        font-family: 'Inconsolata';
+        /*font-size: 2px;*/
+        position:absolute;
+        left: -2%;
+        -webkit-transform:
+        rotate(270deg);
+        -moz-transform:
+        rotate(270deg);
+        -o-transform: rotate(270deg);
+        writing-mode: lr-tb;
+      }
+
+      #allLabel{
+         top: 65%;
+      }
+      #honey{
+         top: 75%;
+      }
+
+    </style>
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/dat.gui.min.js"></script>
+    <script src="js/lib/screenfull.js"></script>
+
+  <body>
+    <div id="container">
+    <div id="title">
+        <h1>HOLOBIONT URBANISM</h1>
+    </div>
+    <div id="bottomnav">
+        <ul>
+            <li><a href="./"><img src="assets/icon/icon_home.png"><br/>HOME</a></li>
+            <li><a href="process.html"><img src="assets/icon/icon_process.png"><br/>PROCESS</a></li>
+            <li><a href="taxonomy.html"><img src="assets/icon/icon_nyc.png"><br/>TAXONOMY</a></li>
+            <li><a href="data-art.html"><img src="assets/icon/icon_team.png"><br/>DATA ART</a></li>
+            <li><a href="experience.html"><img src="assets/icon/icon_discover.png"><br/>EXPERIENCE</a></li>
+        </ul>
+    </div>
+    </div>
+
+<div id="buffer"></div>
+<div id="labelTop">
+  <p>Across: Astoria | Fort Greene | Crown Heights (L) | Crown Heights (TB)</p>
+  <p>Down: All Samples | Honey | Bee | Debris | Inside Hive | Outside Hive</p>
+</div>
+<!-- All -->
+<div class="section group">
+  <div class="col span_1_of_4" id="p0">
+  </div>
+  <div class="col span_1_of_4" id="p1">
+  </div>
+  <div class="col span_1_of_4" id="p2">
+  </div>
+  <div class="col span_1_of_4" id="p3">
+  </div>
+</div>
+<!-- Honey -->
+<div class="section group">
+  <div class="col span_1_of_4" id="p4">
+  </div>
+  <div class="col span_1_of_4" id="p5">
+  </div>
+  <div class="col span_1_of_4" id="p6">
+  </div>
+  <div class="col span_1_of_4" id="p7">
+  </div>
+</div>
+<!-- Bee -->
+<div class="section group">
+  <div class="col span_1_of_4" id="p8">
+  </div>
+  <div class="col span_1_of_4" id="p9">
+  </div>
+  <div class="col span_1_of_4" id="p10">
+  </div>
+  <div class="col span_1_of_4" id="p11">
+  </div>
+</div>
+<!-- Debris -->
+<div class="section group">
+  <div class="col span_1_of_4" id="p12">
+  </div>
+  <div class="col span_1_of_4" id="p13">
+  </div>
+  <div class="col span_1_of_4" id="p14">
+  </div>
+  <div class="col span_1_of_4" id="p15">
+  </div>
+</div>
+<!-- Inside -->
+<div class="section group">
+  <div class="col span_1_of_4" id="p16">
+  </div>
+  <div class="col span_1_of_4" id="p17">
+  </div>
+  <div class="col span_1_of_4" id="p18">
+  </div>
+  <div class="col span_1_of_4" id="p19">
+  </div>
+</div>
+<!-- Outside -->
+<div class="section group">
+  <div class="col span_1_of_4" id="p20">
+  </div>
+  <div class="col span_1_of_4" id="p21">
+  </div>
+  <div class="col span_1_of_4" id="p22">
+  </div>
+  <div class="col span_1_of_4" id="p23">
+  </div>
+</div>
+
+<script>
+
+  var params = {
+      hideNav: false,
+      hideText: false,
+      fullScreen: false
+  };
+  var gui = new dat.GUI();
+  var f1 = gui.addFolder('Press the h key to hide controls');
+  var navController = f1.add(params, 'hideNav').name("Hide Nav Bar");
+  var textController = f1.add(params, 'hideText').name("Hide Text");
+  var fullController = f1.add(params, 'fullScreen').name("Fullscreen");
+  // f1.open();
+  dat.GUI.toggleHide();
+
+  navController.onChange(function(value) {
+      if (value) {
+          $('#container').hide();
+      } else {
+          $('#container').show();
+      }
+  });
+
+  fullController.onChange(function(value) {
+      if (value) {
+          screenfull.request();
+          $('#buffer').hide();
+          // $('#labelTop').hide();
+      } else {
+          screenfull.exit();
+          $('#buffer').show();
+          // $('#labelTop').show();
+      }
+  });
+
+  textController.onChange(function(value) {
+      if (value) {
+          $('#labelTop').hide();
+      } else {
+          $('#labelTop').show();
+      }
+  });
+
+  //FULLSCREEN
+  $(function () {
+      $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+      if (!screenfull.enabled) {
+          return false;
+      }
+
+      $(document).on(screenfull.raw.fullscreenchange,
+          function screenfullChange() {
+              console.log('Fullscreen change');
+              if (screenfull.isFullscreen) {
+                  $("#container").hide();
+                  params.hideNav = true;
+                  params.fullScreen = true;
+              } else {
+                  console.log("MINIMIZING...");
+                  $("#container").show();
+                  params.hideNav = false;
+                  params.fullScreen = false;
+                  console.log("params.fullScreen:" + params.fullScreen);
+              }
+              navController.updateDisplay();
+              fullController.updateDisplay();
+              textController.updateDisplay();
+          });
+  });
+//*****END FULL SCREEN*******//
+
+</script>
+<!-- ************************************************************************ -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+  function makeGraph(filename, theid, parent, width) {
+    var diameter = Math.sqrt(width)*28; //width*1.5;
+
+    var tree = d3.layout.tree()
+        .size([360, diameter / 2 - 120])
+        .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
+
+    var diagonal = d3.svg.diagonal.radial()
+        .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+
+    var svg = d3.select(parent).append("svg")
+        .attr("class", "graph")
+        .attr("id", theid)
+        .attr("width", width)
+        .attr("height", width)
+        .style("overflow", "visible")
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + width / 2 + ")");
+
+    d3.json(filename, function(error, root) {
+      if (error) throw error;
+
+      var nodes = tree.nodes(root),
+          links = tree.links(nodes);
+
+      var link = svg.selectAll(".link")
+          .data(links)
+        .enter().append("path")
+          .attr("class", "link")
+          .attr("d", diagonal);
+
+      var node = svg.selectAll(".node")
+          .data(nodes)
+        .enter().append("g")
+          .attr("class", "node")
+          .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+
+      node.append("circle")
+          .attr("r", 3)//was 3.5
+          .on("mouseover", function(d) {
+            d3.select(this.nextSibling).style("visibility", "visible");
+          }).on("mouseout", function(d) {
+            d3.select(this.nextSibling).style("visibility", "hidden");
+          });
+
+      node.append("text")
+          .attr("dy", ".31em")
+          .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+          .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+          .attr("fill", "white")//text color
+          .text(function(d) { return d.name; })
+          .style("visibility", "hidden")
+
+
+      //var ctx = document.getElementById("svg"),
+      // for (var j = 0; j < node.length; j++) {
+      //   console.log(node[j]);
+      //   for (var k = 0; k < node[j].length; k++) {
+      //     textElm = node[j][k].getElementsByTagName("text")[0];
+      //     // console.log("number of <text>:", textElm.length);
+
+      //     SVGRect = textElm.getBBox();
+      //     console.log("textElm:", textElm);
+
+      //     var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      //     rect.setAttribute("x", SVGRect.x);
+      //     rect.setAttribute("y", SVGRect.y);
+      //     rect.setAttribute("width", SVGRect.width);
+      //     rect.setAttribute("height", SVGRect.height);
+      //     rect.setAttribute("fill", "yellow");
+      //     rect.style.visibility = 'hidden';
+      //     // ctx.insertBefore(rect, textElm);
+      //     parent = textElm.parentElement;
+      //     parent.replaceChild(rect, textElm);
+      //     rect.appendChild(textElm);
+      //     // parent.replaceChild(wrapper, element);
+      //     // wrapper.appendChild(element);
+      //   }
+      // }
+
+    });
+
+    d3.select(self.frameElement).style("height", diameter - 150 + "px");
+  }
+
+  var files = [
+    //All
+    'data/meta_file_astoria.json',
+    'data/meta_file_forteGreen.json',
+    'data/meta_file_crownHeightsL.json',
+    'data/meta_file_crownHeightsTB.json',
+    //Honey
+    'data/meta_file_ASTORIA_HIVE_Honey.json',
+    'data/meta_file_FORT_GREENE_Honey.json',
+    'data/meta_file_CROWN_HEIGHTS_-_LANGSTROTH_Honey.json',
+    'data/meta_file_CROWN_HEIGHTS_-TOP_BAR_Honey.json',
+    //Bee
+    'data/meta_file_ASTORIA_HIVE_Bee.json',
+    'data/meta_file_FORT_GREENE_Bee.json',
+    'data/meta_file_CROWN_HEIGHTS_-_LANGSTROTH_Bee.json',
+    'data/meta_file_CROWN_HEIGHTS_-TOP_BAR_Bee.json',
+    //Debris
+    'data/meta_file_ASTORIA_HIVE_Bee_Debris_Liquid.json',
+    'data/meta_file_FORT_GREENE_Bee_Debris_Solid.json',
+    'data/meta_file_CROWN_HEIGHTS_-_LANGSTROTH_Bee_Debris_Liquid.json',
+    'data/meta_file_CROWN_HEIGHTS_-TOP_BAR_Scrapper.json',
+    //Inside
+    'data/meta_file_ASTORIA_HIVE_Inside_Hive.json',
+    'data/meta_file_FORT_GREENE_Inside_Hive.json',
+    'data/meta_file_CROWN_HEIGHTS_-_LANGSTROTH_Inside_Hive.json',
+    'data/meta_file_CROWN_HEIGHTS_-TOP_BAR_Inside_Hive.json',
+    //Outside
+    'data/meta_file_ASTORIA_HIVE_Propolis_in_Solvant.json',
+    'data/meta_file_FORT_GREENE_Outside_Hive.json',
+    'data/meta_file_CROWN_HEIGHTS_-_LANGSTROTH_Bee_Debris_Solid.json',
+    'data/meta_file_CROWN_HEIGHTS_-TOP_BAR_Outside_Hive.json'
+  ];
+
+  for (var i = 0; i < files.length; ++i) {
+    var width = $("#p" + i).width();
+    // console.log(width);
+    makeGraph(files[i], i, "#p" + i, width);
+  }
+
+  $(window).resize(function() {
+    // remove old data first
+    for (var i = 0; i < files.length; ++i) {
+      $("#" + i).remove();
+      var width = $("#p" + i).width();
+      // console.log(width);
+      makeGraph(files[i], i, "#p" + i, width);
+    }
+  });
+
+
+</script>
+</body>
+</html>

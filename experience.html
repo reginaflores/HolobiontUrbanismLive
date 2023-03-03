@@ -1,0 +1,1003 @@
+<!-- ************************************************ -->
+<!-- Created by Regina Flores Mir -->
+<!-- Holobiont Urbanism -->
+<!-- In collaboration with the MIT Media Lab-->
+<!-- ************************************************ -->
+<!--
+______________________________________________________
+______________________________________________________
+Microbiome Simulation/Visualization/Experience
+
+Code References: 
+Wagner: https://www.clicktorelease.com/tmp/wagner/ 
+______________________________________________________
+______________________________________________________
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HolobiontUrbanism</title>
+	<style>
+	#thermal {
+		display: none;
+	}
+ 	#offscreen, #flow {
+		display: none;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		background-color: black;
+	}
+	.dg.a { 
+        margin-right:60px !important; 
+        margin-top: 15% !important;
+    }
+    #intro {
+        width: 40vw;
+        height: 50vh;
+        padding: 25vh 30vw 25vh 30vw;
+        color: #fff;
+        position: fixed;
+        z-index: 10;
+        background-color: #000;
+        text-align: justify;
+
+    }
+    button {
+        padding: 20px;
+        background-color: #000;
+        border: 2px solid #fff;
+        color: #fff;
+        font-family: Courier, sans-serif;
+        font-size: inherit;
+    }
+
+    button:hover {
+        background-color: #fff;
+        color: #000;
+        cursor: pointer;
+    }
+
+
+	</style>
+	<link type='text/css' rel='stylesheet' href="css/style.css">
+</head>
+
+<body>
+	<video id="thermal" src="assets/video/film2small.mov" autoplay ></video> 
+	<canvas id="offscreen" width=80 height=60></canvas>
+	<!-- Fullscreen -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/lib/screenfull.js"></script>
+	<!-- Three.js -->
+	<script src="js/lib/dat.gui.min.js"></script>
+	<script src="js/lib/three.min.75.js"></script> <!-- latest three.js -->
+	<script src="js/lib/TrackballControls.js"></script>
+	<script src="js/lib/OrbitControls.js"></script>
+	<script src="js/lib/threex.windowresize.js"></script>
+	<!-- Wagner -->
+	<script src="js/lib/Wagner.js"></script>
+	<script src="js/lib/Wagner.base.js"></script>
+	<script src="js/lib/ShaderLoader.js"></script>
+	<script src="js/lib/debugTools.js"></script>
+	<!-- Tracking Thermal video -->
+	<script src="js/particles/particle_tracking.js"></script>
+	<!--Temp Particles-->
+	<script src="js/particles/particle_flow.js"></script>
+	<script src="js/particles/flow_field.js"></script>
+	<script src="js/lib/perlin-noise-simplex.js"></script>
+	<!-- Data -->
+	<script src="js/particles/locationInfo.js"></script>
+	<!-- Edge Detection Shader -->
+	<div id="vertex-shader" style="display:none">
+		varying vec2 vUv;
+
+		uniform sampler2D texture;
+		uniform float distortionAmount; // 0.0 - 1.0
+
+		void main() {
+			vUv = uv;
+
+			vec3 textureColor = texture2D(texture, vUv).rgb;
+			float brightness = ( textureColor.r + textureColor.g + textureColor.b ) / 3.0;
+
+			vec3 vertexPosition = position.xyz;
+
+			float zPostion = mix(position.z, brightness, distortionAmount);
+
+			vertexPosition = vec3(position.xy, zPostion);
+
+			// do not touch below this line
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( vertexPosition, 1.0 );
+		}
+	</div>
+
+	<div id="fragment-shader" style="display:none">
+		uniform sampler2D texture;
+		uniform float width;
+		uniform float height;
+		uniform int runEdgeDetection;
+		varying vec2 vUv;
+		uniform float alpha;
+
+		void main(void) {
+			float w = 1.0/width;
+			float h = 1.0/height;
+			vec2 texCoord = vUv;
+
+			vec4 n[9];
+			n[0] = texture2D(texture, texCoord + vec2( -w, -h));
+			n[1] = texture2D(texture, texCoord + vec2(0.0, -h));
+			n[2] = texture2D(texture, texCoord + vec2(  w, -h));
+			n[3] = texture2D(texture, texCoord + vec2( -w, 0.0));
+			n[4] = texture2D(texture, texCoord);
+			n[5] = texture2D(texture, texCoord + vec2(  w, 0.0));
+			n[6] = texture2D(texture, texCoord + vec2( -w, h));
+			n[7] = texture2D(texture, texCoord + vec2(0.0, h));
+			n[8] = texture2D(texture, texCoord + vec2(  w, h));
+			vec4 sobel_horizEdge = n[2] + (2.0*n[5]) + n[8] - (n[0] + (2.0*n[3]) + n[6]);
+			vec4 sobel_vertEdge  = n[0] + (2.0*n[1]) + n[2] - (n[6] + (2.0*n[7]) + n[8]);
+			vec3 sobel = sqrt((sobel_horizEdge.rgb * sobel_horizEdge.rgb) + (sobel_vertEdge.rgb * sobel_vertEdge.rgb));
+
+
+			if (runEdgeDetection == 1) {
+				gl_FragColor = vec4(sobel.r, sobel.r, sobel.r, alpha);
+			}
+			else {
+				gl_FragColor = vec4(texture2D(texture, texCoord).rgb, alpha);
+			}
+		}
+	</div>
+
+	<div id="particle-vertex-shader" style="display:none">
+		attribute float alpha;
+		attribute float textureIdx;
+
+		varying float varAlpha;
+		varying float varTextureIdx;
+
+
+		uniform float pointSize;
+
+
+		void main() {
+			varAlpha = alpha;
+			varTextureIdx = textureIdx;
+
+			gl_PointSize = pointSize;
+			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+		}
+	</div>
+
+
+	<div id="particle-fragment-shader" style="display:none">
+		varying float varAlpha;
+		varying float varTextureIdx;
+
+		uniform vec3 color;
+		uniform sampler2D textures[16];
+
+		vec4 dynamicTexWorkaround(float textureIdx, vec2 pos) {
+			int textIdx = int(textureIdx);
+
+			vec4 col = vec4(0.);
+
+			if (textIdx == 0) { col = texture2D(textures[0], pos); }
+			if (textIdx == 1) { col = texture2D(textures[1], pos); }
+			if (textIdx == 2) { col = texture2D(textures[2], pos); }
+			if (textIdx == 3) { col = texture2D(textures[3], pos); }
+			if (textIdx == 4) { col = texture2D(textures[4], pos); }
+			if (textIdx == 5) { col = texture2D(textures[5], pos); }
+			if (textIdx == 6) { col = texture2D(textures[6], pos); }
+			if (textIdx == 7) { col = texture2D(textures[7], pos); }
+			if (textIdx == 8) { col = texture2D(textures[8], pos); }
+			if (textIdx == 9) { col = texture2D(textures[9], pos); }
+			if (textIdx == 10) { col = texture2D(textures[10], pos); }
+			if (textIdx == 11) { col = texture2D(textures[11], pos); }
+			if (textIdx == 12) { col = texture2D(textures[12], pos); }
+			if (textIdx == 13) { col = texture2D(textures[13], pos); }
+			if (textIdx == 14) { col = texture2D(textures[14], pos); }
+			if (textIdx == 15) { col = texture2D(textures[15], pos); }
+
+			return col;
+		}
+
+		void main() {
+			gl_FragColor = dynamicTexWorkaround(varTextureIdx, gl_PointCoord);
+			gl_FragColor.a = varAlpha;
+		}
+	</div>
+
+	<!--HEADER-->
+    <div id="container">
+    <div id="title">
+        <h1>HOLOBIONT URBANISM</h1>
+    </div>
+    <div id="bottomnav">
+        <ul>
+            <li><a href="./"><img src="assets/icon/icon_home.png"><br/>HOME</a></li> 
+            <li><a href="process.html"><img src="assets/icon/icon_process.png"><br/>PROCESS</a></li> 
+            <li><a href="taxonomy.html"><img src="assets/icon/icon_nyc.png"><br/>TAXONOMY</a></li> 
+            <li><a href="data-art.html"><img src="assets/icon/icon_team.png"><br/>DATA ART</a></li> 
+            <li><a href="experience.html"><img src="assets/icon/icon_discover.png"><br/>EXPERIENCE</a></li> 
+        </ul>
+    </div>
+    </div>
+	<!-- END HEADER -->
+	    <div id="intro">
+        <p>This is a creative coding experiment for the artistic visualizations of the Holobiont Urbanism project.
+        <br>
+        <br>
+        Press the letter key 'h' to hide the user interface on the right. 
+        <br>
+        <p>Music is Lizard Point (Ambient 4: On Land, 1982) by Brian Eno.
+        <br>	
+        <br>	
+        </p>
+        <button>Begin</button>
+    </div>
+ 
+	<script>
+
+		var blobParticles1, blobParticles2, blobParticles3, context, offscreenContext, flowData = [ [], [], [] ];
+		var currentLocation = 'Astoria';
+		var videoThermal = document.getElementById('thermal');
+
+		var video = videoThermal;
+
+		var videoHeight = 240 * 2;
+		var videoWidth = 320 * 2;
+
+		var globalParticles;
+
+		function init() {
+			var texture, mesh;
+
+			var up = new THREE.Vector3(0,0,1);
+			var forward = new THREE.Vector3(0,1,0);
+
+			var vertexShader = document.getElementById('vertex-shader').textContent;
+			var fragmentShader = document.getElementById('fragment-shader').textContent;
+
+			var particleVertexShader = document.getElementById('particle-vertex-shader').textContent;
+			var particleFragmentShader = document.getElementById('particle-fragment-shader').textContent;
+			
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+
+			document.body.appendChild(renderer.domElement);
+			
+			var scene = new THREE.Scene();
+
+			var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
+
+			//larger # is farther away - small # is closer
+			camera.position.z = 1;
+
+			scene.add(camera);
+
+			var controls = new THREE.TrackballControls(camera, renderer.domElement);
+			var winResize   = new THREEx.WindowResize(renderer, camera);
+
+			////////////////////////////////////
+			//Init GUI controls
+			videoControls = new function () {
+			    this.pauuse = function(){video.pause();};
+			    this.plaay = function(){video.play();};
+			    // this.speed = function(){video.defaultPlaybackRate();};
+			};
+			video.volume = 0.0;
+			videoTexture = new THREE.Texture(video);
+			videoTexture.minFilter = THREE.NearestFilter; 
+			////////////////////////////////////
+			video.defaultPlaybackRate = 0.5;
+			////////////////////////////////////
+			//Define gui params:
+			var params = {
+				hideNav: false,
+                fullScreen: false,
+                soundOff: false,
+				//video params	
+				videoAlpha: 0.3, 
+				xscale: 1,
+				yscale: 1,
+				//temp params
+				minTempCutoff1: 31,
+				maxTempCutoff1: 38,
+				minTempCutoff2: 20,
+				maxTempCutoff2: 30,
+				//environment params				
+				runEdgeDetection: false,
+				distortionAmount: 0.08,
+				trackingAlpha: 0.0,
+				flowScale: 0.5,
+			    modx: 0.01,
+			    mody: 0.02,
+
+				//////////////////////
+				//particle Bin1
+				particleSizeBin1: 2.5,
+				particleCountBin1: 20000,
+			    steerModifierBin1: 0.09,
+			    velocityModifierBin1: 0.007,
+			    airParticleBin1:0.0,
+			    airDeathBin1: 0.00,
+			    speedDampenerBin1: 1,
+			    noiseModifierBin1: 0.162,
+			    distanceModifierBin1: 10,
+			    //////////////////////
+			    //particle Bin2
+				particleSizeBin2: 2.5,
+				particleCountBin2: 20000,
+			    steerModifierBin2: 0.09,
+			    velocityModifierBin2: 0.001,
+			    airParticleBin2:0.0,
+			    airDeathBin2: 0.0,
+			    speedDampenerBin2: 0.88,
+			    noiseModifierBin2: 0.169,
+			    distanceModifierBin2: 10,
+			    //////////////////////
+			    //Particles floor
+				particleFloorCount: 40000,
+			    floorParticleSize: 2.5,
+			    //floor flow
+			    modxAway: 0.01,
+			    modyAway: 0.02,
+			 	awayScale: 0.0,
+			 	awayNoiseLerpModifier: 0.3,
+				floorImageCount: 1,
+			 	floorSteerModifier: 0.28,
+			 	floorVelocityModifier: 1.0,
+			 	floorSpeedDampener: 0.44,
+			 	floorNoiseModifier: 0.05,
+			 	distanceModifier: 5,
+			 	floorDistanceModifier: 5, 
+				//data	
+				location: 'All',
+				//Optical Effects
+				runBlur: true,
+				runBokeh: false,
+				runZoomblur: false,
+				runVignette: true,
+				runDirt: true,
+				runPoissonBlur: false,
+				runNoisePass: false,
+				runMultiPassBloomPass: true,
+				reunCircularBlur: false,
+				runToonPass: false,
+				runhighPassPass: false,
+				//Rotate
+				rotateOn:false
+			};			
+
+			// Define derived params - calculated from UI when needed
+
+			var derivedParams = {
+				actualMinTempCutoff1 : minMaxScale(params.minTempCutoff1, 10, 40, 0.0, 1.0),
+				actualMaxTempCutoff1 : minMaxScale(params.maxTempCutoff1, 10, 40, 0.0, 1.0),
+				actualMinTempCutoff2 : minMaxScale(params.minTempCutoff2, 10, 40, 0.0, 1.0),
+				actualMaxTempCutoff2 : minMaxScale(params.maxTempCutoff2, 10, 40, 0.0, 1.0),
+			};
+
+			var gui = new dat.GUI();
+			
+			var f0 = gui.addFolder('Press the h key to hide controls')
+			var navController = f0.add(params, 'hideNav').name("Hide Nav Bar");
+            var fullController = f0.add(params, 'fullScreen').name("Fullscreen");
+            f0.add(params, 'soundOff').name("Sound Off");
+
+			f0.open();
+
+			var f1 = gui.addFolder('Video Controls');
+			f1.add(videoControls, "pauuse").name("Pause Video");
+			f1.add(videoControls, "plaay").name("Play Video");
+			f1.add(params, 'videoAlpha', 0.0, 1.0);
+			f1.add(params, 'xscale', 0.0, 6).name("Screen Width");
+			f1.add(params, 'yscale', 0.0, 6).name("Screen Height");
+			f1.add(params, 'distortionAmount', 0, 1).name("Add Depth");
+			f1.add(params, 'rotateOn').name("Rotate Scene");
+			f1.open();
+
+			var f2 = gui.addFolder('Temperature Bins');
+			f2.add(params, 'minTempCutoff1', 30, 40).name("Bin 1 min");//hot
+			f2.add(params, 'maxTempCutoff1', 30, 40).name("Bin 1 max");
+			f2.add(params, 'minTempCutoff2', 10, 30).name("Bin 2 min");//cold
+			f2.add(params, 'maxTempCutoff2', 10, 30).name("Bin 2 max");	
+			// f2.open();
+
+			var f5 = gui.addFolder('Choose Location');
+			f5.add(params, 'location', [ 'All','Astoria', 'CrowneHeights','CrowneHeightsLangstroth', 'ForteGreen' ] );
+			// f5.open();			
+
+			var f4 = gui.addFolder('Blob Tracking');
+			f4.add(params, 'trackingAlpha', 0.0, 1.0);
+			// f4.open();
+
+			var f8 = gui.addFolder('FlowField Controls');
+			f8.add(params, 'modx', 0.0, 0.2);
+			f8.add(params, 'mody', 0.0, 0.2);
+			f8.add(params, 'flowScale', 0.0, 1.5);
+		
+			var f6 = gui.addFolder('Bin 1 (40-30 C) Flow Controls');//hot 
+			f6.add(params, 'particleSizeBin1', 0.0, 10);
+			f6.add(params, 'steerModifierBin1', 0.0, 0.3);
+			f6.add(params, 'velocityModifierBin1', 0.0, 0.3);
+			f6.add(params, 'airParticleBin1', 0.0, 0.05);//5%
+			f6.add(params, 'airDeathBin1', 0.0, 0.01);//1%
+			f6.add(params, 'speedDampenerBin1', 0.0, 1);
+			f6.add(params, 'noiseModifierBin1', 0.0, 0.3);
+			f6.add(params, 'distanceModifierBin1', 0.0, 10);
+			// f6.open();
+			
+			var f7 = gui.addFolder('Bin 2 (30-10 C) Flow Controls');//hot 
+			f7.add(params, 'particleSizeBin2', 0.0, 10);
+			f7.add(params, 'steerModifierBin2', 0.0, 0.3);
+			f7.add(params, 'velocityModifierBin2', 0.0, 0.3);
+			f7.add(params, 'airParticleBin2', 0.0, 0.05);//5%
+			f7.add(params, 'airDeathBin2', 0.0, 0.01);//1%
+			f7.add(params, 'speedDampenerBin2', 0.0, 1);
+			f7.add(params, 'noiseModifierBin2', 0.0, 0.3);
+			f7.add(params, 'distanceModifierBin2', 0.0, 10);
+			// f7.open();
+
+			var f8 = gui.addFolder('Dark Matter Flow Controls');//cold
+			f8.add(params, 'modxAway', 0.0, 0.2);
+			f8.add(params, 'modyAway', 0.0, 0.2);
+			f8.add(params, 'floorParticleSize', 0.0, 5);
+			f8.add(params, 'floorSteerModifier', 0.0, 1);
+			f8.add(params, 'floorVelocityModifier', 0.0, 1);
+			f8.add(params, 'floorSpeedDampener', 0.0, 1);
+			f8.add(params, 'floorNoiseModifier', 0.0, 1);
+			f8.add(params, 'floorDistanceModifier', 0.0, 10);
+			f8.add(params, 'awayScale', 0.0, 10); //repulsion
+			f8.add(params, 'awayNoiseLerpModifier', 0.0, 1);//repulsion
+			// f8.open();
+			
+			var f9 = gui.addFolder('Optical Effects');
+			f9.add(params, 'runBlur').name("Blur");
+			f9.add(params, 'runZoomblur').name("Zoom Blur");
+			f9.add(params, 'runPoissonBlur').name("Super Blur");				
+			f9.add(params, 'runBokeh').name("Zoom Focus");
+			f9.add(params, 'runVignette').name("Brighten");
+			f9.add(params, 'runDirt').name("Dirty Lens");
+			f9.add(params, 'runNoisePass').name("Add Grain");
+			f9.add(params, 'runMultiPassBloomPass').name("Optical Bloom");
+			f9.add(params, 'reunCircularBlur').name("Circular Blur");
+			f9.add(params, 'runToonPass').name("Color Camera");
+			f9.add(params, 'runhighPassPass').name("Dark Field");
+			f9.add(params, 'runEdgeDetection').name("Edges");				
+			f9.open();
+
+			////////////////////////////////////
+			//uncomment to hide gui
+			// dat.GUI.toggleHide();
+			////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+
+            navController.onChange(function(value) {
+                if (value) {
+                    $('#container').hide();
+                } else {
+                    $('#container').show();
+                }
+            });
+
+            fullController.onChange(function(value) {
+                if (value) {
+                    screenfull.request();
+                } else {
+                    screenfull.exit();
+                }
+            });
+
+            //FULLSCREEN
+            $(function () {
+                $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+                if (!screenfull.enabled) {
+                    return false;
+                }
+
+                $(document).on(screenfull.raw.fullscreenchange, 
+                    function screenfullChange() {
+                        console.log('Fullscreen change');
+                        if (screenfull.isFullscreen) {
+                            $("#container").hide();
+                            params.hideNav = true;
+                            params.fullScreen = true;
+                        } else {
+                            console.log("MINIMIZING...");
+                            $("#container").show();
+                            params.hideNav = false;
+                            params.fullScreen = false;
+                            console.log("params.fullScreen:" + params.fullScreen);
+                        }
+                        navController.updateDisplay();
+                        fullController.updateDisplay();
+                    });
+            });
+			//*****END FULL SCREEN*******//
+			////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+            window.mobilecheck = function() {
+              var check = false;
+              (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+              return check;
+            }
+
+            if(window.mobilecheck()){
+                dat.GUI.toggleHide();
+            }
+
+			//*****END MOBILE*******//
+
+////////////////////////////////////////////////////////////////////
+			//Audio: Lizard Point (Ambient 4: On Land, 1982) - Brian Eno
+			var audio = new Audio('assets/sound/ambient.mp3');
+			audio.play();
+			//
+			//create 3d object and apply video texture to it
+			videoMesh = new THREE.Object3D();
+			scene.add(videoMesh);
+
+			var geom = new THREE.PlaneGeometry(1, 1, 500, 500);
+
+			material = new THREE.ShaderMaterial({
+			    uniforms: {
+			        texture: {
+			                type: 't',
+			                value: videoTexture
+			        },
+			        runEdgeDetection: {
+			            type: 'i',
+			            value: 0
+			        },
+			        distortionAmount:{
+			            type: 'f',
+			            value: 0
+			        },
+			        width: {
+			                type: 'f',
+			                value: 320.0
+			        },
+			        height: {
+			                type: 'f',
+			                value: 240.0
+			        },
+			        alpha: {
+			        	type: 'f',
+			        	value: params.videoAlpha
+			        },
+			    },
+			    depthTest: false,
+	 			transparent: true,
+			    vertexShader: vertexShader,
+			    fragmentShader: fragmentShader
+			});
+
+			mesh = new THREE.Mesh(geom, material);
+			
+			videoMesh.add(mesh);
+			
+			//Particles being mapped to temp points
+///////////////////////////////////////////////////
+//Note on images:
+// the particles object takes in the bucket as a param
+// converts the bucket to an array of just amounts, eg. [1,10,90,…]
+// converts that to percentages, eg. [0.01, 0.05, 0.1, …]
+// converts that to cumulative percentages, eg. [0.01, 0.06, 0.16, …, 1]
+// so the last one would be 100%
+// then uses the cumulative amounts to assign the PNG
+// so basically if you had 10% and 90%
+// then 10% would be assigned to the first PNG, and 90% would be assigned to the second PNG
+// then it just uses that to set the texture index
+// But it can only ever use 16 because of the limitations of the shader
+//////////////////////////////////////////////////
+			var textureArrayHot = [];
+			for (var k = 1; k <= 16; k++) { //note 16 is GPU image limit
+				var t = new THREE.TextureLoader().load("assets/textures/species/oscillator" + k + ".png");
+				textureArrayHot.push(t);
+			}
+			var textureArrayNotSoHot = [];
+			for (var k = 17; k <= 32; k++) { //note 16 is GPU image limit
+				var t = new THREE.TextureLoader().load("assets/textures/species/oscillator" + k + ".png");
+				textureArrayNotSoHot.push(t);
+			}
+			var flowField = new FlowField(50, params.modx, params.mody, params.modxAway, params.modyAway);
+			var particlesFlowHot = new Particles({
+				scene: scene,
+				flowField: flowField,
+				particleCount: params.particleCountBin1,
+				scaleX: params.xscale,
+				scaleY: params.yscale,
+				textureArray: textureArrayHot,
+				vertexShader: particleVertexShader,
+				fragmentShader: particleFragmentShader
+			});
+
+			//for testing/debuging
+			globalParticles = particlesFlowHot;
+			//
+
+			var particlesFlowNotSoHot = new Particles({
+				scene: scene,
+				flowField: flowField,
+				particleCount: params.particleCountBin2,
+				scaleX: params.xscale,
+				scaleY: params.yscale,
+				textureArray: textureArrayNotSoHot,
+				vertexShader: particleVertexShader,
+				fragmentShader: particleFragmentShader
+			});
+
+			var particlesFlowFloor = new Particles({
+				scene: scene,
+				flowField: flowField,
+				particleCount: params.particleFloorCount,
+				scaleX: params.xscale,
+				scaleY: params.yscale,
+				vertexShader: particleVertexShader,
+				fragmentShader: particleFragmentShader,
+				textureArray: [
+					new THREE.TextureLoader().load("assets/textures/black.png"),
+				]
+			});
+
+			//LOCATION :DATA
+			locationInfo = new LocationInfo("data/tempMapping.json");
+			console.log("********************************");
+			console.log(JSON.stringify(locationInfo.getData()));
+			
+			//Particles from oflow to track video
+			blobParticles1 = new ParticlesTracking(scene, 6000, 'assets/textures/red.png');
+			blobParticles2 = new ParticlesTracking(scene, 6000, 'assets/textures/blue.png');
+			// blobParticles3 = new ParticlesTracking(scene, 4100, 'assets/textures/blue.png');
+
+//////////////////////////////////////////////////////////////////////////////////////////
+			//WAGNER OPTICAL EFFECTS
+			WAGNER.vertexShadersPath = 'js/vertex-shaders';
+			WAGNER.fragmentShadersPath = 'js/fragment-shaders';
+
+			WAGNER.BokehPoisonPass = function() {
+				WAGNER.Pass.call( this );
+				WAGNER.log( 'BokehPoison Pass constructor' );
+				this.loadShader( 'bokeh-poison-dof-fs.glsl' );
+				this.params.amount = 10;
+				this.params.radius = 1;
+				this.params.tBias = null
+				this.params.focalDistance = 1;
+				this.params.aperture = 1;
+			};
+			WAGNER.BokehPoisonPass.prototype = Object.create( WAGNER.Pass.prototype );
+				WAGNER.BokehPoisonPass.prototype.run = function( c ) {
+				this.shader.uniforms.amount.value = this.params.amount;
+				this.shader.uniforms.radius.value = this.params.radius;
+				this.shader.uniforms.focalDistance.value = this.params.focalDistance;
+				this.shader.uniforms.aperture.value = this.params.aperture;
+				this.shader.uniforms.tBias.value = this.params.tBias;
+				c.pass( this.shader );
+			};
+
+			var composer = new WAGNER.Composer(renderer);
+			composer.setSize(window.innerWidth, window.innerHeight); // TODO: resize this with window
+
+			var zoomBlurPass = new WAGNER.ZoomBlurPass();
+			var	barrelBlurPass = new WAGNER.BarrelBlurPass();
+			var bokehPass = new WAGNER.BokehPoisonPass();
+			var	dirtPass = new WAGNER.DirtPass();
+			var vignette2Pass = new WAGNER.Vignette2Pass();
+			var	poissonDiscBlur = new WAGNER.PoissonDiscBlurPass();
+			var	noisePass = new WAGNER.NoisePass();
+			var	multiPassBloomPass = new WAGNER.MultiPassBloomPass();
+			var	circularBlur = new WAGNER.CircularBlurPass();
+			var toonPass = new WAGNER.ToonPass();
+			var	highPassPass = new WAGNER.HighPassPass();
+
+			zoomBlurPass.params.strength = 0.1;
+			zoomBlurPass.params.center.set(window.innerWidth / 2, window.innerHeight / 2);
+
+			renderer.autoClearColor = true;
+
+			var offscreenCanvas = document.getElementById('offscreen');
+			// var canvas = document.getElementById('flow');
+
+			// context = canvas.getContext('2d');
+			offscreenContext = offscreenCanvas.getContext('2d');
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+			function minMaxScale(value, newMin, newMax, oldMin, oldMax) {
+			    return (oldMax-oldMin)*(value-newMin)/(newMax - newMin) + oldMin;
+			}
+			// minTemp => minBrightness < colorBrightness < maxTemp => maxBrigthness
+
+			// < 0.2 - black-ish
+			// 0.2 - 0.8 - grey -> 0.35 - 0.45 -> temp -> 25 - 28 ~~~~~~~~~~
+			// > 0.8 - white-ish
+			
+			function isInBucket(color, minTempCutoff, maxTempCutoff) {
+				var R = color[0] / 255;
+				var G = color[1] / 255;
+				var B = color[2] / 255;
+				
+				var luminance = 0.2126 * R + 0.7152 * G + 0.0722 * B;
+
+				return minTempCutoff < luminance && luminance < maxTempCutoff;
+			}
+
+			var canvasVideoWidth = 80;
+			var canvasVideoHeight = 60;
+
+			var maxPointsNum = 500; //fix to allow broweser to not crash. 100 can variable, but seems to break at large numbers like 1000.
+
+			function opticalFlow() {
+				offscreenContext.drawImage(videoThermal, 0, 0, canvasVideoWidth, canvasVideoHeight);
+
+				var imageData = offscreenContext.getImageData(0, 0, canvasVideoWidth, canvasVideoHeight);
+				var d = imageData.data;
+
+				flowData.forEach(function(flowArray) { flowArray.length = 0; }); // reset the arrays of points
+
+				var tempsInBucket1Count = 0;
+				var tempsInBucket2Count = 0;
+
+				for (var i = 0; i < d.length; i += 4) {
+					if (tempsInBucket1Count >= maxPointsNum && tempsInBucket2Count >= maxPointsNum) {
+						break;
+					}
+
+					var color = [
+						d[i],
+						d[i + 1],
+						d[i + 2]
+					];
+
+					var x = (i / 4) % canvasVideoWidth;
+					var y = Math.ceil((i / 4) / canvasVideoWidth);
+
+					var temperatureInBucket1 = isInBucket(color, derivedParams.actualMinTempCutoff1, derivedParams.actualMaxTempCutoff1);
+					var temperatureInBucket2 = isInBucket(color, derivedParams.actualMinTempCutoff2, derivedParams.actualMaxTempCutoff2);
+
+
+					if (temperatureInBucket1 && tempsInBucket1Count < maxPointsNum) {
+						tempsInBucket1Count++;
+						flowData[0].push(
+							new THREE.Vector2(
+								x / (canvasVideoWidth),
+								(1 - y / (canvasVideoHeight))
+							)
+						);
+					}
+					else if (temperatureInBucket2 && tempsInBucket2Count < maxPointsNum) {
+						tempsInBucket2Count++;
+						flowData[1].push(
+							new THREE.Vector2(
+								x / (canvasVideoWidth),
+								(1 - y / (canvasVideoHeight))
+							)
+						);
+					}
+					// else if (temperatureInBucket3) {
+					// 	flowData[2].push(
+					// 		new THREE.Vector2(
+					// 			x / (canvasVideoWidth),
+					// 			(1 - y / (canvasVideoHeight))
+					// 		)
+					// 	);
+					// }
+				}
+			}		
+
+///////////////////////////////////////////////////////////////////
+
+			var timeScale = 0;
+			var countInfo = null;
+			function animate() {
+				requestAnimationFrame(animate);
+
+				if (video.readyState === video.HAVE_ENOUGH_DATA) {
+			        videoTexture.needsUpdate = true;
+			    }
+	
+				if(params.soundOff){
+					audio.pause();
+				}else{
+					audio.play();
+				}
+
+			    if (currentLocation != params.location) {
+			    	currentLocation = params.location;
+			    	countInfo = locationInfo.count(
+			    		currentLocation,
+			    		params.minTempCutoff1,
+			    		params.maxTempCutoff1,
+			    		params.minTempCutoff2,
+			    		params.maxTempCutoff2
+			    		// params.minTempCutoff3,
+			    		// params.maxTempCutoff3
+			    	)
+			    	console.log("NUM IN " + currentLocation + ": " + JSON.stringify(countInfo));
+			    	console.log("Size of bucket1: " + countInfo.bucket1.length);
+			    	console.log("Size of bucket2: " + countInfo.bucket2.length);
+			    	// console.log("Size of bucket3: " + countInfo.bucket3.length);
+			    	var images = locationInfo.getImages();
+			    	for (var i = 0; i < countInfo.bucket1.length; ++i) {
+			    		var s = countInfo.bucket1[i].species;
+			    		console.log("Species:" + s + " Image:" + images[s]);
+			    	}
+			    }
+			    if (countInfo == null) {
+			    	countInfo = locationInfo.count(
+			    		currentLocation,
+			    		params.minTempCutoff1,
+			    		params.maxTempCutoff1,
+			    		params.minTempCutoff2,
+			    		params.maxTempCutoff2
+			    	);
+			    }
+
+				opticalFlow();
+
+				blobParticles1.update(flowData[0], params.xscale, params.yscale, params.trackingAlpha);
+				blobParticles2.update(flowData[1], params.xscale, params.yscale, params.trackingAlpha);
+				// blobParticles3.update(flowData[2], params.xscale, params.yscale, params.trackingAlpha);
+				
+				flowField.gen(params.modx, params.mody, params.modxAway, params.modyAway);
+				flowField.genFromFlow(flowData, params.noiseModifierBin1, params.noiseModifierBin2, params.flowScale, params.awayScale, params.awayNoiseLerpModifier);
+				
+				
+				if (video.ended) {
+			    	video.play();
+			    }
+
+				particlesFlowHot.update({
+					scaleX: params.xscale,
+					scaleY: params.yscale,
+					airParticle:  params.airParticleBin1, 
+					airDeath: params.airDeathBin1, 
+					flowData: flowData[0],
+					flowFieldProperty: "value1", // move in direction of the pink dots
+					checkPointName: "nearestFlowPoint1",
+					steerModifier: params.steerModifierBin1,
+					speedDampener: params.speedDampenerBin1,
+					velocityModifier: params.velocityModifierBin1,
+					opacityCalculationEnabled: true,
+					distanceModifier: params.distanceModifierBin1,
+					numberOfImages: 97,
+					particleSize: params.particleSizeBin1,
+					countInfo: countInfo.bucket1
+				});
+
+				particlesFlowNotSoHot.update({
+					scaleX: params.xscale,
+					scaleY: params.yscale,
+					airParticle:  params.airParticleBin2, 
+					airDeath: params.airDeathBin2, 
+					flowData: flowData[1],
+					flowFieldProperty: "value2", // move in direction of the pink dots
+					checkPointName: "nearestFlowPoint2",
+					steerModifier: params.steerModifierBin2,
+					speedDampener: params.speedDampenerBin2,
+					velocityModifier: params.velocityModifierBin2,
+					opacityCalculationEnabled: true,
+					distanceModifier: params.distanceModifierBin2,
+					numberOfImages: 97, // tell the shader how many images to use from the initial array
+					particleSize: params.particleSizeBin2,
+					countInfo: countInfo.bucket2
+				});
+
+				particlesFlowFloor.update({
+					scaleX: params.xscale,
+					scaleY: params.yscale,
+					airParticle: 0,
+					flowData: flowData[0],
+					flowFieldProperty: "away", // move away from the pink dots
+				 	checkPointName: "awayFlowPoint",
+					steerModifier: params.floorSteerModifier,
+					speedDampener: params.floorSpeedDampener,
+					velocityModifier: params.floorVelocityModifier,
+					opacityCalculationEnabled: true,
+					distanceModifier: params.floorDistanceModifier,
+					numberOfImages: params.floorImageCount, // how many images we use currently
+					particleSize: params.floorParticleSize
+				});
+
+				mesh.scale.set(params.xscale, params.yscale, 1);
+
+				mesh.material.uniforms.runEdgeDetection.value = params.runEdgeDetection;
+				mesh.material.uniforms.distortionAmount.value = params.distortionAmount;
+				mesh.material.uniforms.alpha.value = params.videoAlpha;
+
+				
+				derivedParams.actualMinTempCutoff1 = minMaxScale(params.minTempCutoff1, 10, 40, 0.0, 1.0);
+				derivedParams.actualMaxTempCutoff1 = minMaxScale(params.maxTempCutoff1, 10, 40, 0.0, 1.0);
+				derivedParams.actualMinTempCutoff2 = minMaxScale(params.minTempCutoff2, 10, 40, 0.0, 1.0);
+				derivedParams.actualMaxTempCutoff2 = minMaxScale(params.maxTempCutoff2, 10, 40, 0.0, 1.0);
+			 
+				//ROTATION 
+				var timer = Date.now() * 0.0001;
+                if(params.rotateOn){	        
+                    camera.position.x = Math.cos( timer )*1.5;
+                    camera.position.y = Math.sin( timer )*1.5;
+                    camera.up = up;
+                    camera.position.z = 1; 
+                    camera.lookAt( scene.position );
+
+                } //else {
+                	// camera.position.x = 0;
+                	// camera.position.y = 0;
+                	// camera.up = forward;
+                //}
+                //
+
+				timeScale++;
+				var bokehAmount = (1.0 + Math.sin(timeScale * 0.01)) / 2.0;
+				bokehPass.params.focalDistance = bokehAmount;
+				// bokehPass.params.radius = bokehAmount;
+
+				controls.update();
+				//if composer passes turned off - then you need this:
+				//renderer.render(scene, camera);
+
+				composer.reset();
+				composer.render(scene, camera);
+				if(params.runBlur){
+					composer.pass(barrelBlurPass);	
+				}
+				if(params.runZoomblur){
+					composer.pass(zoomBlurPass);	
+				}
+				if(params.runBokeh){
+					composer.pass(bokehPass);
+				}
+				if(params.runDirt){
+					composer.pass(dirtPass);
+				}
+				if(params.runVignette){
+					composer.pass(vignette2Pass);	
+				}
+				if(params.runPoissonBlur){
+					composer.pass(poissonDiscBlur);
+				}
+				if(params.runNoisePass){
+					composer.pass(noisePass);
+				}
+				if(params.runMultiPassBloomPass){
+					composer.pass(multiPassBloomPass);
+				}
+				if(params.reunCircularBlur){
+					composer.pass(circularBlur);
+				}
+				if(params.runToonPass){
+					composer.pass(toonPass);	
+				}
+				if(params.runhighPassPass){
+					composer.pass(highPassPass);
+				}
+
+				composer.toScreen();
+			}
+			animate();
+		}
+		// window.onload = init;
+	    $(window).on("load", function() {
+	      
+	        $("#container").hide();
+	        video.volume = 0.0;
+
+	        $("#intro button").click(function() {
+ 				 $("#intro").css("opacity", 0.8);
+ 				 $('#intro').delay(1000).fadeOut();
+ 				 $('#container').delay(1000).fadeIn();
+ 				 init();
+	        });
+
+	    })
+
+	</script>
+</body>
+</html>

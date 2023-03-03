@@ -1,0 +1,317 @@
+{
+  "name": "ASTORIA HIVE - Bee Debris Liquid",
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Granulicella",
+                              "size": 0.59015
+                            }
+                          ],
+                          "name": "Granulicella",
+                          "size": 0.59015
+                        }
+                      ],
+                      "name": "Acidobacteriaceae",
+                      "size": 0.59015
+                    }
+                  ],
+                  "name": "Acidobacteriales",
+                  "size": 0.59015
+                }
+              ],
+              "name": "Acidobacteriia",
+              "size": 0.59015
+            }
+          ],
+          "name": "Acidobacteria",
+          "size": 0.59015
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Agromyces",
+                              "size": 0.49463
+                            }
+                          ],
+                          "name": "Agromyces",
+                          "size": 0.49463
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Curtobacterium",
+                              "size": 5.98417
+                            }
+                          ],
+                          "name": "Curtobacterium",
+                          "size": 5.98417
+                        }
+                      ],
+                      "name": "Microbacteriaceae",
+                      "size": 6.47879
+                    }
+                  ],
+                  "name": "Actinomycetales",
+                  "size": 6.47879
+                }
+              ],
+              "name": "Actinobacteria",
+              "size": 6.47879
+            }
+          ],
+          "name": "Actinobacteria",
+          "size": 6.47879
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Hymenobacter",
+                              "size": 6.3503
+                            }
+                          ],
+                          "name": "Hymenobacter",
+                          "size": 6.3503
+                        }
+                      ],
+                      "name": "Cytophagaceae",
+                      "size": 6.3503
+                    }
+                  ],
+                  "name": "Cytophagales",
+                  "size": 6.3503
+                }
+              ],
+              "name": "Cytophagia",
+              "size": 6.3503
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Pedobacter",
+                              "size": 1.1853
+                            }
+                          ],
+                          "name": "Pedobacter",
+                          "size": 1.1853
+                        }
+                      ],
+                      "name": "Sphingobacteriaceae",
+                      "size": 1.1853
+                    }
+                  ],
+                  "name": "Sphingobacteriales",
+                  "size": 1.1853
+                }
+              ],
+              "name": "Sphingobacteriia",
+              "size": 1.1853
+            }
+          ],
+          "name": "Bacteroidetes",
+          "size": 7.53561
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "name": "Deinococcales",
+                      "size": 2.3024299999999998
+                    }
+                  ],
+                  "name": "Deinococcales",
+                  "size": 2.3024299999999998
+                }
+              ],
+              "name": "Deinococci",
+              "size": 2.3024299999999998
+            }
+          ],
+          "name": "Deinococcus_Thermus",
+          "size": 2.3024299999999998
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Lactococcus_lactis",
+                                  "size": 0.67723
+                                }
+                              ],
+                              "name": "Lactococcus_lactis",
+                              "size": 0.67723
+                            }
+                          ],
+                          "name": "Lactococcus",
+                          "size": 0.67723
+                        }
+                      ],
+                      "name": "Streptococcaceae",
+                      "size": 0.67723
+                    }
+                  ],
+                  "name": "Lactobacillales",
+                  "size": 0.67723
+                }
+              ],
+              "name": "Bacilli",
+              "size": 0.67723
+            }
+          ],
+          "name": "Firmicutes",
+          "size": 0.67723
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Janthinobacterium",
+                              "size": 3.80862
+                            }
+                          ],
+                          "name": "Janthinobacterium",
+                          "size": 3.80862
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "name": "Massilia",
+                              "size": 26.64322
+                            }
+                          ],
+                          "name": "Massilia",
+                          "size": 26.64322
+                        }
+                      ],
+                      "name": "Oxalobacteraceae",
+                      "size": 30.45184
+                    }
+                  ],
+                  "name": "Burkholderiales",
+                  "size": 30.45184
+                }
+              ],
+              "name": "Betaproteobacteria",
+              "size": 30.45184
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Pseudomonas_fragi",
+                                  "size": 6.57021
+                                }
+                              ],
+                              "name": "Pseudomonas_fragi",
+                              "size": 6.57021
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "name": "Pseudomonas_mandelii",
+                                  "size": 0.69306
+                                }
+                              ],
+                              "name": "Pseudomonas_mandelii",
+                              "size": 0.69306
+                            },
+                            {
+                              "children": [],
+                              "name": "Pseudomonas",
+                              "size": 44.70067
+                            }
+                          ],
+                          "name": "Pseudomonas",
+                          "size": 51.96394
+                        }
+                      ],
+                      "name": "Pseudomonadaceae",
+                      "size": 51.96394
+                    }
+                  ],
+                  "name": "Pseudomonadales",
+                  "size": 51.96394
+                }
+              ],
+              "name": "Gammaproteobacteria",
+              "size": 51.96394
+            }
+          ],
+          "name": "Proteobacteria",
+          "size": 82.41578
+        }
+      ],
+      "name": "Bacteria",
+      "size": 100.0
+    }
+  ]
+}

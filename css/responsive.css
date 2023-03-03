@@ -1,0 +1,128 @@
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+    #nav {
+        bottom: 25%;
+    }
+
+    #support {
+        margin-top: 15px;
+        font-size: 15px;
+    }
+
+    #header div {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+    #header {
+        height: 60px;
+    }
+
+    #logo {
+        width: 80%;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    #nycml {
+        height: 20px;
+        padding-top: 10px;
+
+    }
+
+    #nycedc {
+        height: 20px;
+        padding-top: 8px;
+    }
+
+    #parsons {
+        height: 17px;
+        padding-top: 12px;
+    }
+
+    #csi {
+        height: 60px;
+    }
+
+    .text1 {
+        font-size: 15px;
+    }
+
+    #nav {
+        font-size: 16px;
+    }
+
+    #nav span {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #phone {
+        top: 10%;
+        height: 400px;
+        margin-left: 10%;
+    }
+
+    #description {
+        position: absolute;
+        font-weight: 700;
+        font-size: 25px;
+    }
+
+    #copyright {
+        font-size: 10px;
+    }
+
+    .photo {
+        width: 150px;
+    }
+
+    #name td{
+        padding-left: 15px;
+    }
+
+    #link td{
+        padding-left: 15px;
+    }
+
+    .person {
+        width: 250px;
+        margin-right: 50px;
+    }
+
+    .icon {
+        height: 50px;
+        margin-bottom: 10px;
+    }
+
+    .right div {
+        padding-right: 10%;
+        padding-top: 2%;
+    }
+
+    #nav {
+        position: absolute;
+        bottom: 15%;
+        left: 40%;
+        color: white;
+    }
+
+
+}
+
+
+
+
+
+
