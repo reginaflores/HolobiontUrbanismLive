@@ -13,6 +13,21 @@
         font-family: 'Inconsolata';
     }
 
+/*--------------Img Landing Page----------------------*/
+
+    .imgbox {
+        display: grid;
+        height: 100%;
+        margin-top: 250px;
+        
+        
+    }
+    .center-fit {
+        max-width: 100%;
+        max-height: 100vh;
+        margin: auto;
+    }
+
     /*--------------NAV BAR MAIN----------------------*/
 
     #title {
