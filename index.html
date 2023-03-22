@@ -23,7 +23,11 @@
     <!-- Marked -->
     <script type="text/javascript" src="js/lib/marked.js"></script>
     <!-- Patricio Gonzalez Vivo Tangram Contributions -->
-    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/build/GlslCanvas.min.js"></script>
+    <!-- <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/build/GlslCanvas.min.js"></script> -->
+    <!-- added march 2023 -->
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+  
     <script type="text/javascript" src="js/lib/common.js"></script>
     <script type="text/javascript" src="js/lib/parser.js"></script>
   </head>
@@ -54,13 +58,18 @@
     <script src="js/lib/stats.min.js"></script>
     <script src="js/lib/dat.gui.min.js"></script>
     <!-- Main tangram library -->
-    <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+    <!-- <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script> -->
+    <!-- updating tanagram library -->
+    <!-- added march 2023 -->
+    <script type="module" src="https://unpkg.com/tangram/dist/tangram.min.mjs"></script>
+    <script nomodule src="https://unpkg.com/tangram/dist/tangram.min.js"></script>
 
     <!-- Loading the Map - Code from Tangram Demo -->
     <!-- Note that here you call the .yaml file AND the default lat/lng -->
-    <script src="js/tangram/loadMap.js"></script>
+    <!-- commenting out loadMap.js in march 2023 to just put online w an image -->
+    <!-- <script src="js/tangram/loadMap.js"></script> -->
     <!-- <script src="js/loadGUI.js"></script> -->
-    
+    <img src="assets/process/map.png">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
